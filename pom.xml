@@ -29,10 +29,23 @@
         <lapps.serialization>2.1.0</lapps.serialization>
         <opennlp.version>1.5.3</opennlp.version>
         <stanford.version>3.4.1</stanford.version>
+        <hibernate.version>5.1.0.Final</hibernate.version>
     </properties>
 
 
 	<dependencies>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.4.1208</version>
+        </dependency>
 
         <dependency>
             <groupId>org.lappsgrid</groupId>
@@ -83,7 +96,35 @@
 	<build>
 		<finalName>${project.artifactId}#${project.version}</finalName>
 		<plugins>
-            
+            <plugin>
+                <groupId>de.juplo</groupId>
+                <artifactId>hibernate4-maven-plugin</artifactId>
+                <version>1.0.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>export</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <driverClassName>org.postgresql.Driver</driverClassName>
+                    <hibernateDialect>org.hibernate.dialect.PostgresPlusDialect</hibernateDialect>
+                    <username>postgres</username>
+                    <password>postgres</password>
+                    <url>jdbc:postgresql://localhost:5432/mydb</url>
+                    <target>BOTH</target>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.postgresql</groupId>
+                        <artifactId>postgresql</artifactId>
+                        <version>9.4.1208</version>
+                    </dependency>
+                </dependencies>
+
+            </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
