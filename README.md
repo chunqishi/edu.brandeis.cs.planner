@@ -5,9 +5,16 @@
 
 # Strategy
 
+1. 
+2. 
+3. 
+
+
+# Tools
+
 ## Prolog
 
-1. http://www.gprolog.org/
+1). http://www.gprolog.org/
 
 ## Rule
 
