@@ -58,6 +58,13 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>gnu</groupId>
+            <artifactId>gnuprolog</artifactId>
+            <version>0.2.6</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/libs/gnuprologjava-0.2.6.jar</systemPath>
+        </dependency>
 
         <dependency>
             <groupId>it.unibo.alice.tuprolog</groupId>
