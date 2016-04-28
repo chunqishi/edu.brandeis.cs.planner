@@ -74,3 +74,7 @@ target
 *.iml
 out
 gen
+
+### Eclipse project files
+*.project
+.settings/
