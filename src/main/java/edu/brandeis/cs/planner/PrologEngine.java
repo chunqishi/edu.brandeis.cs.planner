@@ -64,7 +64,6 @@ public class PrologEngine {
             getVariableSet(query, vars);
             for (VariableTerm v : vars)
                 System.out.println("\n" + v.name + " =  " + v);
-
         } else {
             System.out.println("CODE:" + r);
         }
