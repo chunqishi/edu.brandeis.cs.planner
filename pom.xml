@@ -96,35 +96,34 @@
 	<build>
 		<finalName>${project.artifactId}#${project.version}</finalName>
 		<plugins>
-            <plugin>
-                <groupId>de.juplo</groupId>
-                <artifactId>hibernate4-maven-plugin</artifactId>
-                <version>1.0.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>export</goal>
-                        </goals>
-                    </execution>
-                </executions>
+            <!--<plugin>-->
+                <!--<groupId>de.juplo</groupId>-->
+                <!--<artifactId>hibernate4-maven-plugin</artifactId>-->
+                <!--<version>1.0.3</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>export</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<driverClassName>org.postgresql.Driver</driverClassName>-->
+                    <!--<hibernateDialect>org.hibernate.dialect.PostgresPlusDialect</hibernateDialect>-->
+                    <!--<username>postgres</username>-->
+                    <!--<password>postgres</password>-->
+                    <!--<url>jdbc:postgresql://localhost:5432/mydb</url>-->
+                    <!--<target>BOTH</target>-->
+                <!--</configuration>-->
+                <!--<dependencies>-->
+                    <!--<dependency>-->
+                        <!--<groupId>org.postgresql</groupId>-->
+                        <!--<artifactId>postgresql</artifactId>-->
+                        <!--<version>9.4.1208</version>-->
+                    <!--</dependency>-->
+                <!--</dependencies>-->
+            <!--</plugin>-->
 
-                <configuration>
-                    <driverClassName>org.postgresql.Driver</driverClassName>
-                    <hibernateDialect>org.hibernate.dialect.PostgresPlusDialect</hibernateDialect>
-                    <username>postgres</username>
-                    <password>postgres</password>
-                    <url>jdbc:postgresql://localhost:5432/mydb</url>
-                    <target>BOTH</target>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.postgresql</groupId>
-                        <artifactId>postgresql</artifactId>
-                        <version>9.4.1208</version>
-                    </dependency>
-                </dependencies>
-
-            </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>

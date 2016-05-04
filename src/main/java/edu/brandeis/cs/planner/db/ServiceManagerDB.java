@@ -28,7 +28,7 @@ public class ServiceManagerDB {
     }
 
     public ServiceManagerDB(){
-        factory = new Configuration().configure().buildSessionFactory();
+        factory = new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
     }
 
     /* Method to  READ all the employees */
