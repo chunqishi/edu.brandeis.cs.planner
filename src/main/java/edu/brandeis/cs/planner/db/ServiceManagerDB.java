@@ -33,12 +33,13 @@ public class ServiceManagerDB {
 
     /* Method to  READ all the employees */
     public void listServices() {
+//        Session session = factory.getCurrentSession();
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            String query = "SELECT * from service";
-            List employees = session.createQuery(query).list();
+            String query = "SELECT * from service;";
+            List employees = session.createSQLQuery(query).list();
             for (Iterator iterator = employees.iterator(); iterator.hasNext(); ) {
                 ServiceEntity si = (ServiceEntity) iterator.next();
                 System.out.println(si);
