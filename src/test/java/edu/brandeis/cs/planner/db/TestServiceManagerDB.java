@@ -1,7 +1,12 @@
 package edu.brandeis.cs.planner.db;
 
 
-public class TestServiceManagerDB {
-    
+import org.junit.Test;
 
+public class TestServiceManagerDB {
+
+    @Test
+    public void test(){
+        System.out.println("TEST...");
+    }
 }
