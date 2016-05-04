@@ -56,9 +56,262 @@ import javax.persistence.Table;
 @Table(name = "service")
 public class ServiceEntity {
 
+    public ServiceEntity(){
+
+    }
+
+    public ServiceEntity(String dtype, String gridid, String serviceid, Date createddatetime, Date updateddatetime, boolean active, String alternateserviceid, String appauthkey, boolean approved, String containertype, String copyrightinfo, boolean federateduseallowed, String howtogetmembershipinfo, int instancesize, int instancetype, String licenseinfo, boolean membersonly, String owneruserid, String resourceid, boolean streaming, int timeoutmillis, boolean usealternateservice, boolean visible, String wrappersourcecodeurlclazz, String wrappersourcecodeurlstringvalue, boolean deployed, String deployedid) {
+        this.dtype = dtype;
+        this.gridid = gridid;
+        this.serviceid = serviceid;
+        this.createddatetime = createddatetime;
+        this.updateddatetime = updateddatetime;
+        this.active = active;
+        this.alternateserviceid = alternateserviceid;
+        this.appauthkey = appauthkey;
+        this.approved = approved;
+        this.containertype = containertype;
+        this.copyrightinfo = copyrightinfo;
+        this.federateduseallowed = federateduseallowed;
+        this.howtogetmembershipinfo = howtogetmembershipinfo;
+        this.instancesize = instancesize;
+        this.instancetype = instancetype;
+        this.licenseinfo = licenseinfo;
+        this.membersonly = membersonly;
+        this.owneruserid = owneruserid;
+        this.resourceid = resourceid;
+        this.streaming = streaming;
+        this.timeoutmillis = timeoutmillis;
+        this.usealternateservice = usealternateservice;
+        this.visible = visible;
+        this.wrappersourcecodeurlclazz = wrappersourcecodeurlclazz;
+        this.wrappersourcecodeurlstringvalue = wrappersourcecodeurlstringvalue;
+        this.deployed = deployed;
+        this.deployedid = deployedid;
+    }
+
 //    @Id
 //    @GeneratedValue
 //    private Long id;
+
+
+    public void setDtype(String dtype) {
+        this.dtype = dtype;
+    }
+
+    public String getGridid() {
+        return gridid;
+    }
+
+    public void setGridid(String gridid) {
+        this.gridid = gridid;
+    }
+
+    public String getServiceid() {
+        return serviceid;
+    }
+
+    public void setServiceid(String serviceid) {
+        this.serviceid = serviceid;
+    }
+
+    public Date getCreateddatetime() {
+        return createddatetime;
+    }
+
+    public void setCreateddatetime(Date createddatetime) {
+        this.createddatetime = createddatetime;
+    }
+
+    public Date getUpdateddatetime() {
+        return updateddatetime;
+    }
+
+    public void setUpdateddatetime(Date updateddatetime) {
+        this.updateddatetime = updateddatetime;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getAlternateserviceid() {
+        return alternateserviceid;
+    }
+
+    public void setAlternateserviceid(String alternateserviceid) {
+        this.alternateserviceid = alternateserviceid;
+    }
+
+    public String getAppauthkey() {
+        return appauthkey;
+    }
+
+    public void setAppauthkey(String appauthkey) {
+        this.appauthkey = appauthkey;
+    }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
+
+    public String getContainertype() {
+        return containertype;
+    }
+
+    public void setContainertype(String containertype) {
+        this.containertype = containertype;
+    }
+
+    public String getCopyrightinfo() {
+        return copyrightinfo;
+    }
+
+    public void setCopyrightinfo(String copyrightinfo) {
+        this.copyrightinfo = copyrightinfo;
+    }
+
+    public boolean isFederateduseallowed() {
+        return federateduseallowed;
+    }
+
+    public void setFederateduseallowed(boolean federateduseallowed) {
+        this.federateduseallowed = federateduseallowed;
+    }
+
+    public String getHowtogetmembershipinfo() {
+        return howtogetmembershipinfo;
+    }
+
+    public void setHowtogetmembershipinfo(String howtogetmembershipinfo) {
+        this.howtogetmembershipinfo = howtogetmembershipinfo;
+    }
+
+    public int getInstancesize() {
+        return instancesize;
+    }
+
+    public void setInstancesize(int instancesize) {
+        this.instancesize = instancesize;
+    }
+
+    public int getInstancetype() {
+        return instancetype;
+    }
+
+    public void setInstancetype(int instancetype) {
+        this.instancetype = instancetype;
+    }
+
+    public String getLicenseinfo() {
+        return licenseinfo;
+    }
+
+    public void setLicenseinfo(String licenseinfo) {
+        this.licenseinfo = licenseinfo;
+    }
+
+    public boolean isMembersonly() {
+        return membersonly;
+    }
+
+    public void setMembersonly(boolean membersonly) {
+        this.membersonly = membersonly;
+    }
+
+    public String getOwneruserid() {
+        return owneruserid;
+    }
+
+    public void setOwneruserid(String owneruserid) {
+        this.owneruserid = owneruserid;
+    }
+
+    public String getResourceid() {
+        return resourceid;
+    }
+
+    public void setResourceid(String resourceid) {
+        this.resourceid = resourceid;
+    }
+
+    public boolean isStreaming() {
+        return streaming;
+    }
+
+    public void setStreaming(boolean streaming) {
+        this.streaming = streaming;
+    }
+
+    public int getTimeoutmillis() {
+        return timeoutmillis;
+    }
+
+    public void setTimeoutmillis(int timeoutmillis) {
+        this.timeoutmillis = timeoutmillis;
+    }
+
+    public boolean isUsealternateservice() {
+        return usealternateservice;
+    }
+
+    public void setUsealternateservice(boolean usealternateservice) {
+        this.usealternateservice = usealternateservice;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public String getWrappersourcecodeurlclazz() {
+        return wrappersourcecodeurlclazz;
+    }
+
+    public void setWrappersourcecodeurlclazz(String wrappersourcecodeurlclazz) {
+        this.wrappersourcecodeurlclazz = wrappersourcecodeurlclazz;
+    }
+
+    public String getWrappersourcecodeurlstringvalue() {
+        return wrappersourcecodeurlstringvalue;
+    }
+
+    public void setWrappersourcecodeurlstringvalue(String wrappersourcecodeurlstringvalue) {
+        this.wrappersourcecodeurlstringvalue = wrappersourcecodeurlstringvalue;
+    }
+
+    public boolean isDeployed() {
+        return deployed;
+    }
+
+    public void setDeployed(boolean deployed) {
+        this.deployed = deployed;
+    }
+
+    public String getDeployedid() {
+        return deployedid;
+    }
+
+    public void setDeployedid(String deployedid) {
+        this.deployedid = deployedid;
+    }
+
+    public String getDtype() {
+
+        return dtype;
+    }
+
 
     @Column(name = "dtype")
     private String dtype;
@@ -66,6 +319,7 @@ public class ServiceEntity {
     @Column(name = "gridid")
     private String gridid;
 
+    @Id
     @Column(name = "serviceid")
     private String serviceid;
 
