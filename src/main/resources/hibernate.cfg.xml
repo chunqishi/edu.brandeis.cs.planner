@@ -10,16 +10,10 @@
         <property name="hibernate.connection.url">jdbc:postgresql://localhost/langrid</property>
         <property name="hibernate.connection.username">langrid</property>
         <property name="hibernate.connection.password">langrid</property>
-
         <!-- SQL dialect -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</property>
-
         <!-- Print executed SQL to stdout -->
         <property name="show_sql">true</property>
-
-        <!-- Drop and re-create all database on startup -->
-        <property name="hibernate.hbm2ddl.auto">create-drop</property>
-
         <!-- Annotated entity classes -->
         <mapping class="edu.brandeis.cs.planner.db.ServiceEntity"/>
     </session-factory>
