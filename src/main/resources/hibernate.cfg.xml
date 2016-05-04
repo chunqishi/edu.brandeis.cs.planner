@@ -21,6 +21,6 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
         <!-- Annotated entity classes -->
-        <mapping class="com.jvmhub.tutorial.entity.AppUser"/>
+        <mapping class="edu.brandeis.cs.planner.db.ServiceEntity"/>
     </session-factory>
 </hibernate-configuration>

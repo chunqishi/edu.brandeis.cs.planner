@@ -13,47 +13,47 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
+
+/***
+ * CREATE TABLE service (
+ * dtype character varying(31) NOT NULL,
+ * gridid character varying(255) NOT NULL,
+ * serviceid character varying(255) NOT NULL,
+ * createddatetime timestamp without time zone,
+ * updateddatetime timestamp without time zone,
+ * active boolean NOT NULL,
+ * alternateserviceid character varying(255),
+ * appauthkey character varying(255),
+ * approved boolean NOT NULL,
+ * containertype character varying(255),
+ * copyrightinfo character varying(255),
+ * federateduseallowed boolean NOT NULL,
+ * howtogetmembershipinfo text,
+ * instance oid,
+ * instancesize integer NOT NULL,
+ * instancetype integer,
+ * licenseinfo text,
+ * membersonly boolean NOT NULL,
+ * owneruserid character varying(255),
+ * resourceid character varying(255),
+ * servicedescription text,
+ * servicename character varying(255),
+ * servicetypedomainid character varying(255),
+ * servicetypeid character varying(255),
+ * streaming boolean,
+ * timeoutmillis integer NOT NULL,
+ * usealternateservice boolean NOT NULL,
+ * visible boolean NOT NULL,
+ * wrappersourcecodeurlclazz character varying(255),
+ * wrappersourcecodeurlstringvalue character varying(255),
+ * wsdl oid,
+ * deployed boolean,
+ * deployedid character varying(255)
+ * );
+ ***/
+
 @Entity
 @Table(name = "service")
-
-
-/**
- * CREATE TABLE service (
- dtype character varying(31) NOT NULL,
- gridid character varying(255) NOT NULL,
- serviceid character varying(255) NOT NULL,
- createddatetime timestamp without time zone,
- updateddatetime timestamp without time zone,
- active boolean NOT NULL,
- alternateserviceid character varying(255),
- appauthkey character varying(255),
- approved boolean NOT NULL,
- containertype character varying(255),
- copyrightinfo character varying(255),
- federateduseallowed boolean NOT NULL,
- howtogetmembershipinfo text,
- instance oid,
- instancesize integer NOT NULL,
- instancetype integer,
- licenseinfo text,
- membersonly boolean NOT NULL,
- owneruserid character varying(255),
- resourceid character varying(255),
- servicedescription text,
- servicename character varying(255),
- servicetypedomainid character varying(255),
- servicetypeid character varying(255),
- streaming boolean,
- timeoutmillis integer NOT NULL,
- usealternateservice boolean NOT NULL,
- visible boolean NOT NULL,
- wrappersourcecodeurlclazz character varying(255),
- wrappersourcecodeurlstringvalue character varying(255),
- wsdl oid,
- deployed boolean,
- deployedid character varying(255)
- );
- */
 public class ServiceEntity {
 
 //    @Id
@@ -107,8 +107,6 @@ public class ServiceEntity {
 
 //    @Column(name = "instance")
 //    private int instance;
-
-
 
     @Column(name = "instancesize")
     private int instancesize;
@@ -166,4 +164,5 @@ public class ServiceEntity {
 
     @Column(name = "deployedid")
     private String deployedid;
+
 }
