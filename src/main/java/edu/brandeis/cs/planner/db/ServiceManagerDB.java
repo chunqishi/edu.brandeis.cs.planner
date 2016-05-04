@@ -2,7 +2,6 @@ package edu.brandeis.cs.planner.db;
 
 
 import java.util.List;
-import java.util.Date;
 import java.util.Iterator;
 
 import org.hibernate.HibernateException;
@@ -25,14 +24,15 @@ public class ServiceManagerDB {
         ServiceManagerDB ME = new ServiceManagerDB();
 
       /* List down all the employees */
-        ME.listEmployees();
+        ME.listServices();
+    }
 
-      /* List down new list of the employees */
-        ME.listEmployees();
+    public ServiceManagerDB(){
+        factory = new Configuration().configure().buildSessionFactory();
     }
 
     /* Method to  READ all the employees */
-    public void listEmployees() {
+    public void listServices() {
         Session session = factory.openSession();
         Transaction tx = null;
         try {
