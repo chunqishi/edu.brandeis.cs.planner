@@ -41,6 +41,7 @@ public class ServiceManagerDB {
             List employees = session.createQuery(query).list();
             for (Iterator iterator = employees.iterator(); iterator.hasNext(); ) {
                 ServiceEntity si = (ServiceEntity) iterator.next();
+                System.out.println(si);
             }
             tx.commit();
         } catch (HibernateException e) {

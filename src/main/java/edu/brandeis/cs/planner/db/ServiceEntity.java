@@ -4,6 +4,8 @@ package edu.brandeis.cs.planner.db;
  * Created by 310201833 on 2016/5/4.
  */
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
+
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -419,4 +421,7 @@ public class ServiceEntity {
     @Column(name = "deployedid")
     private String deployedid;
 
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this);
+    }
 }
