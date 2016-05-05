@@ -1,6 +1,7 @@
 package edu.brandeis.cs.planner.db;
 
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Iterator;
 
@@ -41,6 +42,7 @@ public class ServiceManagerDB {
             String query = "SELECT * from service;";
             List<Object[]> services = (List<Object[]>)session.createSQLQuery(query).list();
             for (Object[] tuple: services) {
+                System.out.println(Arrays.toString(tuple));
                 ServiceEntity si = (ServiceEntity) tuple[0];
                 Number roleId = (Number)tuple[1];
                 System.out.println(si);
