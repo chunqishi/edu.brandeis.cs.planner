@@ -20,19 +20,21 @@ public class WSDLInfo {
     List<String> wsdls = new ArrayList<String>();
 
     Parameters params = new Parameters();
-    public static final String Param_Grid = "grids";
+    public static final String Param_Grid = "grid.service_manager";
     List<String> grids = new ArrayList<String>();
 
     public WSDLInfo() {
+//        System.out.println(WSDLInfo.class.getResource("/lappsgrid.xml").getFile());
         FileBasedConfigurationBuilder<XMLConfiguration> builder =
                 new FileBasedConfigurationBuilder<XMLConfiguration>(XMLConfiguration.class)
                         .configure(params.xml()
-                                .setFileName("/lappsgrid.xml")
-                                .setValidating(true));
+                                .setFileName(WSDLInfo.class.getResource("/lappsgrid.xml").getFile()));
         try {
             XMLConfiguration config = builder.getConfiguration();
+//            System.out.println(config.getString("grid.service_manager"));
             for (String grid : config.getStringArray(Param_Grid))
                 grids.add(grid);
+            System.out.println(grids);
         } catch (ConfigurationException e) {
             e.printStackTrace();
         }
