@@ -14,7 +14,8 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.connection.username">langrid</property>
         <property name="hibernate.connection.password">langrid</property>
-        <!--<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>-->
+        <property name="hibernate.current_session_context_class">thread</property>
+    <!--<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>-->
         <!-- Annotated entity classes -->
         <!-- mapping files -->
         <mapping resource="/edu.brandeis.cs.planner.db.ServiceEntity.hbm.xml" />

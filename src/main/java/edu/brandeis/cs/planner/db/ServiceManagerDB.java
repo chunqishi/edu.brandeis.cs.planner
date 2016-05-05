@@ -34,13 +34,13 @@ public class ServiceManagerDB {
 
     /* Method to  READ all the employees */
     public void listServices() {
-//        Session session = factory.getCurrentSession();
-        Session session = factory.openSession();
+        Session session = factory.getCurrentSession();
+//        Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            String query = "SELECT * from service;";
-            List<ServiceEntity> services = (List<ServiceEntity> )session.createSQLQuery(query).list();
+            String query = "select h from ServiceEntity as h";
+            List<ServiceEntity> services = (List<ServiceEntity> )session.createQuery(query).list();
             for (ServiceEntity service: services) {
 //                System.out.println(Arrays.toString(tuple));
 //                ServiceEntity si = (ServiceEntity) tuple[0];
