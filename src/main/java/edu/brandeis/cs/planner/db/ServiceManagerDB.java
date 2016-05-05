@@ -35,8 +35,7 @@ public class ServiceManagerDB {
     /* Method to  READ all the employees */
     public void listServices() {
 //        Session session = factory.getCurrentSession();
-//        Session session = factory.openSession();
-        Session session = factory.getCurrentSession();
+        Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
