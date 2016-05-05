@@ -34,8 +34,8 @@
         <property name="resourceid" column="resourceid" type="string"/>
         <property name="servicedescription" column="servicedescription" type="string"/>
         <property name="servicename" column="servicename" type="string"/>
-        <property name="servicetypedomainid" column="servicename" type="string"/>
-        <property name="servicetypeid" column="servicename" type="string"/>
+        <property name="servicetypedomainid" column="servicetypedomainid" type="string"/>
+        <property name="servicetypeid" column="servicetypeid" type="string"/>
         <property name="streaming" column="streaming" type="boolean"/>
 
         <property name="timeoutmillis" column="timeoutmillis" type="int"/>
