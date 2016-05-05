@@ -8,6 +8,7 @@ import org.apache.commons.configuration2.XMLConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+import org.apache.commons.beanutils.PropertyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * Created by 310201833 on 2016/5/5.
  */
 public class WSDLInfo {
+    List<String> wsdls = new ArrayList<String>();
 
     Parameters params = new Parameters();
     public static final String Param_Grid = "grids";
@@ -27,13 +29,7 @@ public class WSDLInfo {
                         .configure(params.xml()
                                 .setFileName("/lappsgrid.xml")
                                 .setValidating(true));
-
-//        FileBasedConfigurationBuilder<FileBasedConfiguration> builder =
-//                new FileBasedConfigurationBuilder<FileBasedConfiguration>(PropertiesConfiguration.class)
-//                        .configure(params.properties()
-//                                .setFileName("lappsgrid.properties"));
         try {
-//            Configuration config = builder.getConfiguration();
             XMLConfiguration config = builder.getConfiguration();
             for (String grid : config.getStringArray(Param_Grid))
                 grids.add(grid);
@@ -41,6 +37,8 @@ public class WSDLInfo {
             e.printStackTrace();
         }
     }
+
+
 
 
 }
