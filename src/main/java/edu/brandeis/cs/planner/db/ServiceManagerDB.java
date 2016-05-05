@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * 
+ *
  */
 public class ServiceManagerDB {
     final static Logger logger = LoggerFactory.getLogger(ServiceManagerDB.class);

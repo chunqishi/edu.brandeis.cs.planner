@@ -1,0 +1,5 @@
+We talked about this a little bit last Thursday and Keith made a good point. Which is that we do not need to know anything about all the intermediate discriminators. We just need to know the discriminator that describes the result and then chain back from that. So we would start with one of the discriminators from http://vocab.lappsgrid.org/discriminators.html like person or ne or dependency or chunk and then we want to find a path leading to that discriminator starting from one of the raw unprocessed input discriminators (text, xml, json, json-ld, lit, lapps), for example
+
+	text --> module1 --> x --> module2 --> y --> module3 --> person
+
+You may want to start with just listing all the requires and produces data from the metadata and see what we have.
