@@ -20,7 +20,7 @@ public class ServiceManagerDB {
 
     public ServiceManagerDB() {
         if (factory == null)
-            synchronized (factory) {
+            synchronized (ServiceManagerDB.class) {
                 if (factory == null)
                     factory = new Configuration().configure("/hibernate.cfg.xml").buildSessionFactory();
             }
