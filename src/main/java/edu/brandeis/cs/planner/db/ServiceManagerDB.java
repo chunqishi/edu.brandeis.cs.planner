@@ -39,9 +39,10 @@ public class ServiceManagerDB {
         try {
             tx = session.beginTransaction();
             String query = "SELECT * from service;";
-            List employees = session.createSQLQuery(query).list();
-            for (Iterator iterator = employees.iterator(); iterator.hasNext(); ) {
-                ServiceEntity si = (ServiceEntity) iterator.next();
+            List<Object[]> services = (List<Object[]>)session.createSQLQuery(query).list();
+            for (Object[] tuple: services) {
+                ServiceEntity si = (ServiceEntity) tuple[0];
+                Number roleId = (Number)tuple[1];
                 System.out.println(si);
             }
             tx.commit();
