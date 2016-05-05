@@ -23,33 +23,33 @@ import javax.persistence.Table;
  * serviceid character varying(255) NOT NULL,
  * createddatetime timestamp without time zone,
  * updateddatetime timestamp without time zone,
- * active boolean NOT NULL,
+ * active Boolean NOT NULL,
  * alternateserviceid character varying(255),
  * appauthkey character varying(255),
- * approved boolean NOT NULL,
+ * approved Boolean NOT NULL,
  * containertype character varying(255),
  * copyrightinfo character varying(255),
- * federateduseallowed boolean NOT NULL,
+ * federateduseallowed Boolean NOT NULL,
  * howtogetmembershipinfo text,
  * instance oid,
  * instancesize integer NOT NULL,
  * instancetype integer,
  * licenseinfo text,
- * membersonly boolean NOT NULL,
+ * membersonly Boolean NOT NULL,
  * owneruserid character varying(255),
  * resourceid character varying(255),
  * servicedescription text,
  * servicename character varying(255),
  * servicetypedomainid character varying(255),
  * servicetypeid character varying(255),
- * streaming boolean,
+ * streaming Boolean,
  * timeoutmillis integer NOT NULL,
- * usealternateservice boolean NOT NULL,
- * visible boolean NOT NULL,
+ * usealternateservice Boolean NOT NULL,
+ * visible Boolean NOT NULL,
  * wrappersourcecodeurlclazz character varying(255),
  * wrappersourcecodeurlstringvalue character varying(255),
  * wsdl oid,
- * deployed boolean,
+ * deployed Boolean,
  * deployedid character varying(255)
  * );
  ***/
@@ -57,7 +57,7 @@ import javax.persistence.Table;
 //@Entity
 //@Table(name = "service")
 public class ServiceEntity {
-    public ServiceEntity(Long id, String dtype, String gridid, String serviceid, Date createddatetime, Date updateddatetime, boolean active, String alternateserviceid, String appauthkey, boolean approved, String containertype, String copyrightinfo, boolean federateduseallowed, String howtogetmembershipinfo, int instance, int instancesize, int instancetype, String licenseinfo, boolean membersonly, String owneruserid, String resourceid, String servicedescription, String servicetypedomainid, String servicetypeid, String servicename, boolean streaming, int timeoutmillis, boolean usealternateservice, boolean visible, String wrappersourcecodeurlclazz, String wrappersourcecodeurlstringvalue, String wsdl, boolean deployed, String deployedid) {
+    public ServiceEntity(Long id, String dtype, String gridid, String serviceid, Date createddatetime, Date updateddatetime, Boolean active, String alternateserviceid, String appauthkey, Boolean approved, String containertype, String copyrightinfo, Boolean federateduseallowed, String howtogetmembershipinfo, int instance, int instancesize, int instancetype, String licenseinfo, Boolean membersonly, String owneruserid, String resourceid, String servicedescription, String servicetypedomainid, String servicetypeid, String servicename, Boolean streaming, int timeoutmillis, Boolean usealternateservice, Boolean visible, String wrappersourcecodeurlclazz, String wrappersourcecodeurlstringvalue, String wsdl, Boolean deployed, String deployedid) {
         this.id = id;
         this.dtype = dtype;
         this.gridid = gridid;
@@ -137,11 +137,11 @@ public class ServiceEntity {
         this.updateddatetime = updateddatetime;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 
@@ -161,11 +161,11 @@ public class ServiceEntity {
         this.appauthkey = appauthkey;
     }
 
-    public boolean isApproved() {
+    public Boolean isApproved() {
         return approved;
     }
 
-    public void setApproved(boolean approved) {
+    public void setApproved(Boolean approved) {
         this.approved = approved;
     }
 
@@ -185,11 +185,11 @@ public class ServiceEntity {
         this.copyrightinfo = copyrightinfo;
     }
 
-    public boolean isFederateduseallowed() {
+    public Boolean isFederateduseallowed() {
         return federateduseallowed;
     }
 
-    public void setFederateduseallowed(boolean federateduseallowed) {
+    public void setFederateduseallowed(Boolean federateduseallowed) {
         this.federateduseallowed = federateduseallowed;
     }
 
@@ -225,11 +225,11 @@ public class ServiceEntity {
         this.licenseinfo = licenseinfo;
     }
 
-    public boolean isMembersonly() {
+    public Boolean isMembersonly() {
         return membersonly;
     }
 
-    public void setMembersonly(boolean membersonly) {
+    public void setMembersonly(Boolean membersonly) {
         this.membersonly = membersonly;
     }
 
@@ -249,11 +249,11 @@ public class ServiceEntity {
         this.resourceid = resourceid;
     }
 
-    public boolean isStreaming() {
+    public Boolean isStreaming() {
         return streaming;
     }
 
-    public void setStreaming(boolean streaming) {
+    public void setStreaming(Boolean streaming) {
         this.streaming = streaming;
     }
 
@@ -265,19 +265,19 @@ public class ServiceEntity {
         this.timeoutmillis = timeoutmillis;
     }
 
-    public boolean isUsealternateservice() {
+    public Boolean isUsealternateservice() {
         return usealternateservice;
     }
 
-    public void setUsealternateservice(boolean usealternateservice) {
+    public void setUsealternateservice(Boolean usealternateservice) {
         this.usealternateservice = usealternateservice;
     }
 
-    public boolean isVisible() {
+    public Boolean isVisible() {
         return visible;
     }
 
-    public void setVisible(boolean visible) {
+    public void setVisible(Boolean visible) {
         this.visible = visible;
     }
 
@@ -297,11 +297,11 @@ public class ServiceEntity {
         this.wrappersourcecodeurlstringvalue = wrappersourcecodeurlstringvalue;
     }
 
-    public boolean isDeployed() {
+    public Boolean isDeployed() {
         return deployed;
     }
 
-    public void setDeployed(boolean deployed) {
+    public void setDeployed(Boolean deployed) {
         this.deployed = deployed;
     }
 
@@ -336,7 +336,7 @@ public class ServiceEntity {
     private Date updateddatetime;
 
 //    @Column(name = "active")
-    private boolean active;
+    private Boolean active;
 
 //    @Column(name = "alternateserviceid")
     private String alternateserviceid;
@@ -347,7 +347,7 @@ public class ServiceEntity {
 
 
 //    @Column(name = "approved")
-    private boolean approved;
+    private Boolean approved;
 
 //    @Column(name = "containertype")
     private String containertype;
@@ -357,7 +357,7 @@ public class ServiceEntity {
     private String copyrightinfo;
 
 //    @Column(name = "federateduseallowed")
-    private boolean federateduseallowed;
+    private Boolean federateduseallowed;
 
 
 //    @Column(name = "howtogetmembershipinfo")
@@ -380,7 +380,7 @@ public class ServiceEntity {
 
 
 //    @Column(name = "membersonly")
-    private boolean membersonly;
+    private Boolean membersonly;
 
 
 //    @Column(name = "owneruserid")
@@ -462,18 +462,18 @@ public class ServiceEntity {
 
 
 //    @Column(name = "streaming")
-    private boolean streaming;
+    private Boolean streaming;
 
 //    @Column(name = "timeoutmillis")
     private int timeoutmillis;
 
 
 //    @Column(name = "usealternateservice")
-    private boolean usealternateservice;
+    private Boolean usealternateservice;
 
 
 //    @Column(name = "visible")
-    private boolean visible;
+    private Boolean visible;
 
 
 //    @Column(name = "wrappersourcecodeurlclazz")
@@ -489,7 +489,7 @@ public class ServiceEntity {
 
 
 //    @Column(name = "deployed")
-    private boolean deployed;
+    private Boolean deployed;
 
 
 //    @Column(name = "deployedid")
