@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="edu.brandeis.cs.planner.db.ServiceEntity" table="service">
+        <meta attribute="class-description">
+            This class contains the service detail.
+        </meta>
+
+        <id name="serviceid" type="string" column="serviceid">
+            <generator class="native"/>
+        </id>
+        <property name="dtype" column="dtype" type="string"/>
+        <property name="gridid" column="gridid" type="string"/>
+        <property name="createddatetime" column="createddatetime" type="date"/>
+        <property name="updateddatetime" column="updateddatetime" type="date"/>
+        <property name="active" column="active" type="boolean"/>
+        <property name="alternateserviceid" column="alternateserviceid" type="string"/>
+        <property name="appauthkey" column="appauthkey" type="string"/>
+        <property name="approved" column="approved" type="boolean"/>
+        <property name="containertype" column="containertype" type="string"/>
+        <property name="copyrightinfo" column="copyrightinfo" type="string"/>
+        <property name="federateduseallowed" column="federateduseallowed" type="boolean"/>
+        <property name="howtogetmembershipinfo" column="howtogetmembershipinfo" type="string"/>
+        <!--instance oid-->
+        <!--instance oid-->
+        <property name="instancesize" column="instancesize" type="int"/>
+        <property name="instancetype" column="instancetype" type="int"/>
+        <property name="licenseinfo" column="licenseinfo" type="string"/>
+        <property name="membersonly" column="membersonly" type="boolean"/>
+        <property name="owneruserid" column="owneruserid" type="string"/>
+        <property name="resourceid" column="resourceid" type="string"/>
+        <property name="servicedescription" column="servicedescription" type="string"/>
+        <property name="servicename" column="servicename" type="string"/>
+        <property name="servicetypedomainid" column="servicename" type="string"/>
+        <property name="servicetypeid" column="servicename" type="string"/>
+        <property name="streaming" column="streaming" type="boolean"/>
+
+        <property name="timeoutmillis" column="timeoutmillis" type="int"/>
+        <property name="usealternateservice" column="usealternateservice" type="boolean"/>
+        <property name="wrappersourcecodeurlclazz" column="wrappersourcecodeurlclazz" type="string"/>
+        <property name="wrappersourcecodeurlstringvalue" column="wrappersourcecodeurlstringvalue" type="string"/>
+        <property name="deployed" column="deployed" type="boolean"/>
+        <property name="deployedid" column="deployedid" type="string"/>
+        <!--wsdl oid-->
+    </class>
+</hibernate-mapping>

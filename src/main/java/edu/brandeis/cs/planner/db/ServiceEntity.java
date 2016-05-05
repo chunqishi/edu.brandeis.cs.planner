@@ -54,15 +54,11 @@ import javax.persistence.Table;
  * );
  ***/
 
-@Entity
-@Table(name = "service")
+//@Entity
+//@Table(name = "service")
 public class ServiceEntity {
-
-    public ServiceEntity(){
-
-    }
-
-    public ServiceEntity(String dtype, String gridid, String serviceid, Date createddatetime, Date updateddatetime, boolean active, String alternateserviceid, String appauthkey, boolean approved, String containertype, String copyrightinfo, boolean federateduseallowed, String howtogetmembershipinfo, int instancesize, int instancetype, String licenseinfo, boolean membersonly, String owneruserid, String resourceid, boolean streaming, int timeoutmillis, boolean usealternateservice, boolean visible, String wrappersourcecodeurlclazz, String wrappersourcecodeurlstringvalue, boolean deployed, String deployedid) {
+    public ServiceEntity(Long id, String dtype, String gridid, String serviceid, Date createddatetime, Date updateddatetime, boolean active, String alternateserviceid, String appauthkey, boolean approved, String containertype, String copyrightinfo, boolean federateduseallowed, String howtogetmembershipinfo, int instance, int instancesize, int instancetype, String licenseinfo, boolean membersonly, String owneruserid, String resourceid, String servicedescription, String servicetypedomainid, String servicetypeid, String servicename, boolean streaming, int timeoutmillis, boolean usealternateservice, boolean visible, String wrappersourcecodeurlclazz, String wrappersourcecodeurlstringvalue, String wsdl, boolean deployed, String deployedid) {
+        this.id = id;
         this.dtype = dtype;
         this.gridid = gridid;
         this.serviceid = serviceid;
@@ -76,26 +72,34 @@ public class ServiceEntity {
         this.copyrightinfo = copyrightinfo;
         this.federateduseallowed = federateduseallowed;
         this.howtogetmembershipinfo = howtogetmembershipinfo;
+        this.instance = instance;
         this.instancesize = instancesize;
         this.instancetype = instancetype;
         this.licenseinfo = licenseinfo;
         this.membersonly = membersonly;
         this.owneruserid = owneruserid;
         this.resourceid = resourceid;
+        this.servicedescription = servicedescription;
+        this.servicetypedomainid = servicetypedomainid;
+        this.servicetypeid = servicetypeid;
+        this.servicename = servicename;
         this.streaming = streaming;
         this.timeoutmillis = timeoutmillis;
         this.usealternateservice = usealternateservice;
         this.visible = visible;
         this.wrappersourcecodeurlclazz = wrappersourcecodeurlclazz;
         this.wrappersourcecodeurlstringvalue = wrappersourcecodeurlstringvalue;
+        this.wsdl = wsdl;
         this.deployed = deployed;
         this.deployedid = deployedid;
     }
 
+    public ServiceEntity(){
+    }
+
 //    @Id
 //    @GeneratedValue
-//    private Long id;
-
+    private Long id;
 
     public void setDtype(String dtype) {
         this.dtype = dtype;
@@ -310,115 +314,185 @@ public class ServiceEntity {
     }
 
     public String getDtype() {
-
         return dtype;
     }
 
 
-    @Column(name = "dtype")
+//    @Column(name = "dtype")
     private String dtype;
 
-    @Column(name = "gridid")
+//    @Column(name = "gridid")
     private String gridid;
 
-    @Id
-    @Column(name = "serviceid")
+//    @Id
+//    @Column(name = "serviceid")
     private String serviceid;
 
-    @Column(name = "createddatetime")
+//    @Column(name = "createddatetime")
     private Date createddatetime;
 
 
-    @Column(name = "updateddatetime")
+//    @Column(name = "updateddatetime")
     private Date updateddatetime;
 
-    @Column(name = "active")
+//    @Column(name = "active")
     private boolean active;
 
-    @Column(name = "alternateserviceid")
+//    @Column(name = "alternateserviceid")
     private String alternateserviceid;
 
 
-    @Column(name = "appauthkey")
+//    @Column(name = "appauthkey")
     private String appauthkey;
 
 
-    @Column(name = "approved")
+//    @Column(name = "approved")
     private boolean approved;
 
-    @Column(name = "containertype")
+//    @Column(name = "containertype")
     private String containertype;
 
 
-    @Column(name = " copyrightinfo")
+//    @Column(name = " copyrightinfo")
     private String copyrightinfo;
 
-    @Column(name = "federateduseallowed")
+//    @Column(name = "federateduseallowed")
     private boolean federateduseallowed;
 
 
-    @Column(name = "howtogetmembershipinfo")
+//    @Column(name = "howtogetmembershipinfo")
     private String howtogetmembershipinfo;
 
 
 //    @Column(name = "instance")
-//    private int instance;
+    private int instance;
 
-    @Column(name = "instancesize")
+//    @Column(name = "instancesize")
     private int instancesize;
 
 
-    @Column(name = " instancetype")
+//    @Column(name = " instancetype")
     private int instancetype;
 
 
-    @Column(name = "licenseinfo")
+//    @Column(name = "licenseinfo")
     private String licenseinfo;
 
 
-    @Column(name = "membersonly")
+//    @Column(name = "membersonly")
     private boolean membersonly;
 
 
-    @Column(name = "owneruserid")
+//    @Column(name = "owneruserid")
     private String owneruserid;
 
-    @Column(name = "resourceid")
+//    @Column(name = "resourceid")
     private String resourceid;
 
 
-    @Column(name = "streaming")
+    //    @Column(name = "servicedescription")
+    private String servicedescription;
+
+    //    @Column(name = "servicetypedomainid")
+    private String servicetypedomainid;
+
+    public String getServicetypeid() {
+        return servicetypeid;
+    }
+
+    public void setServicetypeid(String servicetypeid) {
+        this.servicetypeid = servicetypeid;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getInstance() {
+        return instance;
+    }
+
+    public void setInstance(int instance) {
+        this.instance = instance;
+    }
+
+    public String getServicetypedomainid() {
+        return servicetypedomainid;
+    }
+
+    public void setServicetypedomainid(String servicetypedomainid) {
+        this.servicetypedomainid = servicetypedomainid;
+    }
+
+    //    @Column(name = "servicetypeid")
+    private String servicetypeid;
+
+
+    public String getServicedescription() {
+        return servicedescription;
+    }
+
+    public void setServicedescription(String servicedescription) {
+        this.servicedescription = servicedescription;
+    }
+
+    public String getServicename() {
+        return servicename;
+    }
+
+    public void setServicename(String servicename) {
+        this.servicename = servicename;
+    }
+
+    public String getWsdl() {
+        return wsdl;
+    }
+
+    public void setWsdl(String wsdl) {
+        this.wsdl = wsdl;
+    }
+
+    //    @Column(name = "servicename")
+    private String servicename;
+
+
+
+//    @Column(name = "streaming")
     private boolean streaming;
 
-    @Column(name = "timeoutmillis")
+//    @Column(name = "timeoutmillis")
     private int timeoutmillis;
 
 
-    @Column(name = "usealternateservice")
+//    @Column(name = "usealternateservice")
     private boolean usealternateservice;
 
 
-    @Column(name = "visible")
+//    @Column(name = "visible")
     private boolean visible;
 
 
-    @Column(name = "wrappersourcecodeurlclazz")
+//    @Column(name = "wrappersourcecodeurlclazz")
     private String wrappersourcecodeurlclazz;
 
 
-    @Column(name = "wrappersourcecodeurlstringvalue")
+//    @Column(name = "wrappersourcecodeurlstringvalue")
     private String wrappersourcecodeurlstringvalue;
 
 
 //    @Column(name = "wsdl")
-//    private String wsdl;
+    private String wsdl;
 
 
-    @Column(name = "deployed")
+//    @Column(name = "deployed")
     private boolean deployed;
 
 
-    @Column(name = "deployedid")
+//    @Column(name = "deployedid")
     private String deployedid;
 
     public String toString() {

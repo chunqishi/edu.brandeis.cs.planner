@@ -35,17 +35,18 @@ public class ServiceManagerDB {
     /* Method to  READ all the employees */
     public void listServices() {
 //        Session session = factory.getCurrentSession();
-        Session session = factory.openSession();
+//        Session session = factory.openSession();
+        Session session = factory.getCurrentSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             String query = "SELECT * from service;";
-            List<Object[]> services = (List<Object[]>)session.createSQLQuery(query).list();
-            for (Object[] tuple: services) {
-                System.out.println(Arrays.toString(tuple));
-                ServiceEntity si = (ServiceEntity) tuple[0];
-                Number roleId = (Number)tuple[1];
-                System.out.println(si);
+            List<ServiceEntity> services = (List<ServiceEntity> )session.createSQLQuery(query).list();
+            for (ServiceEntity service: services) {
+//                System.out.println(Arrays.toString(tuple));
+//                ServiceEntity si = (ServiceEntity) tuple[0];
+//                Number roleId = (Number)tuple[1];
+                System.out.println(service);
             }
             tx.commit();
         } catch (HibernateException e) {
