@@ -8,7 +8,7 @@ public class TestServiceManagerDB {
     @Test
     public void test(){
         System.out.println("TEST...");
-        ServiceManagerDB me = new ServiceManagerDB();
-        me.listServices();
+        ServiceManagerDB sm = new ServiceManagerDB();
+        sm.listServices();
     }
 }

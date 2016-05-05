@@ -13,10 +13,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+/**
+ * 
+ */
 public class ServiceManagerDB {
     final static Logger logger = LoggerFactory.getLogger(ServiceManagerDB.class);
-    private static SessionFactory factory;
 
+    private static SessionFactory factory;
 
     public ServiceManagerDB() {
         if (factory == null)
@@ -26,7 +29,6 @@ public class ServiceManagerDB {
             }
     }
 
-    /* Method to  READ all the employees */
     public List<ServiceEntity> listServices() {
         Session session = factory.getCurrentSession();
 //        Session session = factory.openSession();
@@ -50,19 +52,4 @@ public class ServiceManagerDB {
         }
         return null;
     }
-
-//    public static void main(String[] args) {
-//        try {
-//            factory = new Configuration().configure().buildSessionFactory();
-//        } catch (Throwable ex) {
-//            System.err.println("Failed to create sessionFactory object." + ex);
-//            throw new ExceptionInInitializerError(ex);
-//        }
-//        ServiceManagerDB ME = new ServiceManagerDB();
-//
-//      /* List down all the employees */
-//        ME.listServices();
-//    }
-
-
 }
