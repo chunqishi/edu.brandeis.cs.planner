@@ -23,17 +23,21 @@ public class ServiceInfo {
         this.service_manager = service_manager;
         this.grid_id = grid_id;
         this.service_id = service_id;
+        this.init();
+    }
+
+    public void init() {
         this.wsdl = this.toURL();
         this.wsdlContent = URLFetcher.getAsString(this.wsdl);
     }
 
     public String toURL() {
-        StringBuilder sb = new StringBuilder("service_manager/invoker/");
+        StringBuilder sb = new StringBuilder("invoker/");
         sb.append(grid_id);
         sb.append(":");
         sb.append(service_id);
         try {
-            return new URL(new URL(service_manager), sb.toString()).getPath();
+            return new URL(new URL(service_manager), sb.toString()).toString() ;
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

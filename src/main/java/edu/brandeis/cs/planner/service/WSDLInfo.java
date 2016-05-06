@@ -15,9 +15,9 @@ import java.util.List;
 /**
  * Created by 310201833 on 2016/5/5.
  */
-public class WSDLInfo {
+public class WsdlInfo {
 
-    final static Logger logger = LoggerFactory.getLogger(WSDLInfo.class);
+    final static Logger logger = LoggerFactory.getLogger(WsdlInfo.class);
 
     List<String> wsdls = new ArrayList<String>();
 
@@ -31,8 +31,8 @@ public class WSDLInfo {
     //    List<String> grid_ids = new ArrayList<String>();
     List<List<ServiceInfo>> grid_services = new ArrayList<List<ServiceInfo>>();
 
-    public WSDLInfo() {
-        String xmlPath = WSDLInfo.class.getResource("/config.xml").getFile();
+    public WsdlInfo() {
+        String xmlPath = WsdlInfo.class.getResource("/config.xml").getFile();
         FileBasedConfigurationBuilder<XMLConfiguration> builder =
                 new FileBasedConfigurationBuilder<XMLConfiguration>(XMLConfiguration.class)
                         .configure(params.xml().setFileName(xmlPath));
@@ -41,7 +41,6 @@ public class WSDLInfo {
         } catch (ConfigurationException e) {
             e.printStackTrace();
         }
-
         for (String service_manager : config.getStringArray(Param_Grid_ServiceManager))
             service_managers.add(service_manager);
 //        for (String grid_id : config.getStringArray(Param_Grid_GridID))
@@ -63,8 +62,6 @@ public class WSDLInfo {
             }
             grid_services.add(infos);
         }
-
-
     }
 
 

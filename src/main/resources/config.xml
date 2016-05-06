@@ -24,5 +24,10 @@
             <http_proxy>165.225.96.34:10015</http_proxy>
             <use_proxy>true</use_proxy>
         </proxies>
+        <credential>
+            <use_credential>true</use_credential>
+            <username>eldrad</username>
+            <password>eldrad1234</password>
+        </credential>
     </connection>
 </config>

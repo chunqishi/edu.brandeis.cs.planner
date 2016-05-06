@@ -1,9 +1,13 @@
 package edu.brandeis.cs.planner.utils;
 
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
@@ -23,10 +27,14 @@ public class URLFetcher {
     public static String getAsString(String urlString) {
         int timeout = ConfigXML.config().getInt("connection.timeout");
         boolean use_proxy = ConfigXML.config().getBoolean("connection.proxies.use_proxy");
-        return getAsString(urlString, timeout, use_proxy);
+        boolean has_credential = ConfigXML.config().getBoolean("connection.credential.use_credential");
+        return getAsString(urlString, timeout, use_proxy, has_credential);
     }
 
-    public static String getAsString(String urlString, int timeout_in_s, boolean use_proxy) {
+    public static String getAsString(String urlString, int timeout_in_s, boolean use_proxy, boolean has_credential) {
+        if (urlString == null || urlString.length() < 1)
+            return null;
+
         int timout_in_ms = timeout_in_s * 1000; // Timeout in millis.
         HttpHost proxy = null;
         if (use_proxy) {
@@ -34,6 +42,7 @@ public class URLFetcher {
             logger.debug("HTTP_PROXY: {}", http_proxy);
             proxy = HttpHost.create(http_proxy);
         }
+
         RequestConfig requestConfig = RequestConfig.custom()
                 .setConnectionRequestTimeout(timout_in_ms)
                 .setConnectTimeout(timout_in_ms)
@@ -41,10 +50,19 @@ public class URLFetcher {
                 .setProxy(proxy)
                 .build();
 
+        CloseableHttpClient httpClient = null;
+        if (has_credential) {
+            CredentialsProvider credsProvider = new BasicCredentialsProvider();
+            credsProvider.setCredentials(
+                    new AuthScope("eldrad.cs-i.brandeis.edu", 8080),
+                    new UsernamePasswordCredentials("eldrad", "eldrad1234"));
+            httpClient = HttpClients.custom()
+                    .setDefaultCredentialsProvider(credsProvider)
+                    .build();
+        } else {
+            httpClient = HttpClients.createDefault();
+        }
 
-        if (urlString == null || urlString.length() < 1)
-            return null;
-        CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(urlString);
         httpGet.setConfig(requestConfig);
         httpGet.addHeader("User-Agent", USER_AGENT);
