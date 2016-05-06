@@ -1,5 +1,7 @@
 package edu.brandeis.cs.planner.service;
 
+import edu.brandeis.cs.planner.utils.URLFetcher;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -11,6 +13,8 @@ public class ServiceInfo {
     String service_manager;
     String grid_id;
     String service_id;
+    String wsdl;
+    String wsdlContent;
 
     public ServiceInfo() {
     }
@@ -19,6 +23,8 @@ public class ServiceInfo {
         this.service_manager = service_manager;
         this.grid_id = grid_id;
         this.service_id = service_id;
+        this.wsdl = this.toURL();
+        this.wsdlContent = URLFetcher.getAsString(this.wsdl);
     }
 
     public String toURL() {
@@ -56,5 +62,13 @@ public class ServiceInfo {
 
     public void setService_id(String service_id) {
         this.service_id = service_id;
+    }
+
+    public String getWsdl() {
+        return wsdl;
+    }
+
+    public String getWsdlContent() {
+        return wsdlContent;
     }
 }

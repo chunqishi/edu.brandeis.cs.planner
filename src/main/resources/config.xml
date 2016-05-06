@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<config>
+    <grids>
+        <grid>
+            <service_manager>
+                http://eldrad.cs-i.brandeis.edu:8080/service_manager/
+            </service_manager>
+            <!--<grid_id>-->
+            <!--brandeis_eldrad_grid_1-->
+            <!--</grid_id>-->
+        </grid>
+        <grid>
+            <service_manager>
+                http://grid.anc.org:8080//service_manager/
+            </service_manager>
+            <!--<grid_id>-->
+            <!--anc-->
+            <!--</grid_id>-->
+        </grid>
+    </grids>
+    <connection>
+        <proxies>
+            <http_proxy></http_proxy>
+        </proxies>
+    </connection>
+</config>
