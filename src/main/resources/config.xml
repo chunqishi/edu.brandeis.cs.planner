@@ -24,10 +24,12 @@
             <http_proxy>165.225.96.34:10015</http_proxy>
             <use_proxy>true</use_proxy>
         </proxies>
-        <credential>
+        <credentials>
             <use_credential>true</use_credential>
-            <username>eldrad</username>
-            <password>eldrad1234</password>
-        </credential>
+            <credential host="eldrad.cs-i.brandeis.edu" port="8080">
+                <username>eldrad</username>
+                <password>eldrad1234</password>
+            </credential>
+        </credentials>
     </connection>
 </config>

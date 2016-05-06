@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by 310201833 on 2016/5/6.
@@ -25,9 +27,9 @@ public class URLFetcher {
     public static final String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko";
 
     public static String getAsString(String urlString) {
-        int timeout = ConfigXML.config().getInt("connection.timeout");
-        boolean use_proxy = ConfigXML.config().getBoolean("connection.proxies.use_proxy");
-        boolean has_credential = ConfigXML.config().getBoolean("connection.credential.use_credential");
+        int timeout = ConfigXML.config().getInt("connection/timeout");
+        boolean use_proxy = ConfigXML.config().getBoolean("connection/proxies/use_proxy");
+        boolean has_credential = ConfigXML.config().getBoolean("connection/credentials/use_credential");
         return getAsString(urlString, timeout, use_proxy, has_credential);
     }
 
@@ -38,7 +40,7 @@ public class URLFetcher {
         int timout_in_ms = timeout_in_s * 1000; // Timeout in millis.
         HttpHost proxy = null;
         if (use_proxy) {
-            String http_proxy = ConfigXML.config().getString("connection.proxies.http_proxy");
+            String http_proxy = ConfigXML.config().getString("connection/proxies/http_proxy");
             logger.debug("HTTP_PROXY: {}", http_proxy);
             proxy = HttpHost.create(http_proxy);
         }
@@ -53,9 +55,20 @@ public class URLFetcher {
         CloseableHttpClient httpClient = null;
         if (has_credential) {
             CredentialsProvider credsProvider = new BasicCredentialsProvider();
-            credsProvider.setCredentials(
-                    new AuthScope("eldrad.cs-i.brandeis.edu", 8080),
-                    new UsernamePasswordCredentials("eldrad", "eldrad1234"));
+            try {
+                URL url = new URL(urlString);
+                String host = url.getHost();
+                int port = url.getPort();
+                System.out.println("connection/credentials/credential[@host='" + host + "']/username");
+                String username = ConfigXML.config().getString("connection/credentials/credential[@host='" + host + "']/username");
+                String password = ConfigXML.config().getString("connection/credentials/credential[@host='" + host + "']/password");
+                logger.debug("Credential: Username = {}", username);
+                credsProvider.setCredentials(
+                        new AuthScope(host, port),
+                        new UsernamePasswordCredentials(username, password));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
             httpClient = HttpClients.custom()
                     .setDefaultCredentialsProvider(credsProvider)
                     .build();

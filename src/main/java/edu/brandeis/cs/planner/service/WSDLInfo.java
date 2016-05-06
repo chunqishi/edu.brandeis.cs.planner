@@ -22,7 +22,7 @@ public class WsdlInfo {
     List<String> wsdls = new ArrayList<String>();
 
     Parameters params = new Parameters();
-    public static final String Param_Grid_ServiceManager = "grids.grid.service_manager";
+    public static final String Param_Grid_ServiceManager = "grids/grid/service_manager";
 //    public static final String Param_Grid_GridID = "grids.grid.grid_id";
 
     XMLConfiguration config = null;
