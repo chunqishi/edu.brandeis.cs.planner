@@ -17,6 +17,48 @@ import java.util.List;
 
 /**
  * Created by 310201833 on 2016/5/6.
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ * {
+ "discriminator" : "http://vocab.lappsgrid.org/ns/meta",
+ "payload" : {
+ "$schema" : "http://vocab.lappsgrid.org/schema/service-schema-1.0.0.json",
+ "name" : "edu.brandeis.cs.lappsgrid.stanford.corenlp.Parser",
+ "version" : "2.0.0",
+ "description" : " DkPro OpenNLP Parser",
+ "vendor" : "http://www.cs.brandeis.edu/",
+ "allow" : "http://vocab.lappsgrid.org/ns/allow#any",
+ "license" : "http://vocab.lappsgrid.org/ns/license#apache-2.0",
+ "requires" : {
+ "language" : [ "en" ],
+ "format" : [ "http://vocab.lappsgrid.org/ns/media/jsonld#lif" ],
+ "annotations" : [ "http://vocab.lappsgrid.org/PhraseStructure" ]
+ },
+ "produces" : {
+ "language" : [ "en" ],
+ "format" : [ "http://vocab.lappsgrid.org/ns/media/jsonld#lif" ],
+ "annotations" : [ "http://vocab.lappsgrid.org/PhraseStructure" ]
+ }
+ }
+ }
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  */
 public class Metadata {
     final static Logger logger = LoggerFactory.getLogger(Metadata.class);
