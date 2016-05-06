@@ -1,35 +1,21 @@
-package edu.brandeis.cs.planner;
+package edu.brandeis.cs.planner.deduction;
 
 
-import gnu.prolog.database.Pair;
-import gnu.prolog.demo.mentalarithmetic.NoAnswerException;
-import gnu.prolog.io.TermWriter;
 import gnu.prolog.term.AtomTerm;
 import gnu.prolog.term.CompoundTerm;
-import gnu.prolog.term.IntegerTerm;
 import gnu.prolog.term.Term;
-import gnu.prolog.vm.Environment;
-import gnu.prolog.vm.Interpreter;
-import gnu.prolog.vm.PrologCode;
-import gnu.prolog.vm.TermConstants;
 import gnu.prolog.vm.Environment;
 import gnu.prolog.vm.Interpreter;
 import gnu.prolog.vm.PrologCode;
 import gnu.prolog.vm.PrologException;
-import gnu.prolog.term.AtomTerm;
-import gnu.prolog.term.CompoundTerm;
-import gnu.prolog.term.Term;
 import gnu.prolog.term.VariableTerm;
 import gnu.prolog.io.ParseException;
 import gnu.prolog.io.TermReader;
-import gnu.prolog.database.PrologTextLoaderError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
-import java.io.PrintWriter;
 
 public class PrologEngine {
     final static Logger logger = LoggerFactory.getLogger(PrologEngine.class);

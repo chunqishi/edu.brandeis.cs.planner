@@ -23,12 +23,12 @@ public class WSDLInfo {
 
     Parameters params = new Parameters();
     public static final String Param_Grid_ServiceManager = "grid.service_manager";
-    public static final String Param_Grid_GridID = "grid.grid_id";
+//    public static final String Param_Grid_GridID = "grid.grid_id";
 
     XMLConfiguration config = null;
 
     List<String> service_managers = new ArrayList<String>();
-    List<String> grid_ids = new ArrayList<String>();
+//    List<String> grid_ids = new ArrayList<String>();
     List<List<ServiceInfo>> grid_services = new ArrayList<List<ServiceInfo>>();
 
     public WSDLInfo() {
@@ -44,27 +44,26 @@ public class WSDLInfo {
 
         for (String service_manager : config.getStringArray(Param_Grid_ServiceManager))
             service_managers.add(service_manager);
-        for (String grid_id : config.getStringArray(Param_Grid_GridID))
-            grid_ids.add(grid_id);
+//        for (String grid_id : config.getStringArray(Param_Grid_GridID))
+//            grid_ids.add(grid_id);
         logger.debug("ServiceManagers: {}", service_managers);
-        logger.debug("GridIds: {}", grid_ids);
-
-
+//        logger.debug("GridIds: {}", grid_ids);
         ServiceManagerDB sm = new ServiceManagerDB();
         List<ServiceEntity> entities = sm.listServices();
-
         for (int i = 0; i < service_managers.size(); i ++) {
+            String service_manager = service_managers.get(i);
+//            String grid_id = grid_ids.get(i);
             List<ServiceInfo> infos = new ArrayList<>();
             for (ServiceEntity entity: entities) {
                 ServiceInfo info = new ServiceInfo();
-                info.setGrid_id();
-                info.setService_id();
-                info.setService_manager();
+                info.setService_manager(service_manager);
+                info.setGrid_id(entity.getGridid());
+                info.setService_id(entity.getServiceid());
                 infos.add(info);
             }
             grid_services.add(infos);
         }
-
+        
 
     }
 
