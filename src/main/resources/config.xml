@@ -19,8 +19,10 @@
         </grid>
     </grids>
     <connection>
+        <timeout>3</timeout>
         <proxies>
-            <http_proxy></http_proxy>
+            <http_proxy>165.225.96.34:10015</http_proxy>
+            <use_proxy>true</use_proxy>
         </proxies>
     </connection>
 </config>
