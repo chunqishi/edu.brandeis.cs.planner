@@ -27,8 +27,8 @@
         <credentials>
             <use_credential>true</use_credential>
             <credential host="eldrad.cs-i.brandeis.edu" port="8080">
-                <username>eldrad</username>
-                <password>eldrad1234</password>
+                <username>tester</username>
+                <password>tester</password>
             </credential>
         </credentials>
     </connection>
