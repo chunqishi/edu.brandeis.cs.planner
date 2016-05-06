@@ -17,6 +17,7 @@ package edu.brandeis.cs.planner.utils;
 import java.io.*;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.net.*;
 import java.rmi.RemoteException;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -28,17 +29,17 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.util.Map;
 import java.util.HashMap;
-import java.net.URL;
-import java.net.Proxy;
-import java.net.URLConnection;
 import java.util.AbstractList;
 import java.util.List;
-import java.net.MalformedURLException;
 
+import org.apache.axis.AxisProperties;
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
 import org.apache.axis.message.SOAPHeaderElement;
+import org.apache.http.HttpHost;
 import org.hibernate.engine.jdbc.ReaderInputStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.*;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -51,6 +52,9 @@ import org.xml.sax.SAXException;
  *
  */
 public class WsdlClient {
+
+    final static Logger logger = LoggerFactory.getLogger(WsdlClient.class);
+
     public static void copy(InputStream is, Writer writer) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         String line;
@@ -64,6 +68,7 @@ public class WsdlClient {
     Service service = null;
     Call call = null;
     ServiceConf conf = null;
+    Proxy proxy = null;
 
     final public ServiceConf getConf() {
         return conf;
@@ -81,85 +86,94 @@ public class WsdlClient {
         }
     }
 
-    public void init(URL url) throws WSDLClientException {
+    public void setProxy(String proxyString) {
+        // https://docs.oracle.com/javase/7/docs/api/java/net/doc-files/net-properties.html
+        HttpHost proxy = HttpHost.create(proxyString);
+        String host = proxy.getHostName();
+        int port = proxy.getPort();
+        setProxy(host, port);
+    }
+
+    public void setProxy(String host, int port) {
+        // https://docs.oracle.com/javase/7/docs/api/java/net/doc-files/net-properties.html
+        AxisProperties.setProperty("http.proxyHost", host);
+        AxisProperties.setProperty("http.proxyPort", String.valueOf(port));
+        AxisProperties.setProperty("https.proxyHost", host);
+        AxisProperties.setProperty("https.proxyPort", String.valueOf(port));
+        SocketAddress address = new InetSocketAddress(host, port);
+        proxy = new Proxy(Proxy.Type.HTTP, address);
+    }
+
+    public void init(ServiceConf conf) throws WSDLClientException {
+        logger.debug("WSDL: {}", wsdl);
         Service service = new Service();
         try {
             call = (Call) service.createCall();
         } catch (Exception e) {
             throw new WSDLClientException(e);
         }
+        try {
+            xpath = XPathUtils.newInstance(wsdl);
+            conf.setSoapAddress(xpath
+                    .getText("definitions/service/port/address/@location"));
+        } catch (Exception e) {
+            throw new WSDLClientException(e);
+        }
+    }
+
+
+    public void init(URL url) throws WSDLClientException {
         conf = new ServiceConf();
         try {
             StringWriter writer = new StringWriter();
             copy(url.openStream(), writer);
             conf.setWsdlAddress(url.toString());
             wsdl = writer.toString();
-            xpath = XPathUtils.newInstance(wsdl);
-            conf.setSoapAddress(xpath
-                    .getText("definitions/service/port/address/@location"));
+            init(conf);
         } catch (Exception e) {
             throw new WSDLClientException(e);
         }
     }
 
     public void init(Reader reader) throws WSDLClientException {
-        Service service = new Service();
-        try {
-            call = (Call) service.createCall();
-        } catch (Exception e) {
-            throw new WSDLClientException(e);
-        }
         conf = new ServiceConf();
         try {
             StringWriter writer = new StringWriter();
             copy(new ReaderInputStream(reader), writer);
             wsdl = writer.toString();
-            xpath = XPathUtils.newInstance(wsdl);
-            conf.setSoapAddress(xpath
-                    .getText("definitions/service/port/address/@location"));
+            init(conf);
         } catch (Exception e) {
             throw new WSDLClientException(e);
         }
     }
 
     public void init(File file) throws WSDLClientException {
-        Service service = new Service();
-        try {
-            call = (Call) service.createCall();
-        } catch (Exception e) {
-            throw new WSDLClientException(e);
-        }
         conf = new ServiceConf();
         try {
             StringWriter writer = new StringWriter();
             copy(new FileInputStream(file), writer);
             conf.setWsdlAddress(file.getAbsolutePath());
             wsdl = writer.toString();
-            xpath = XPathUtils.newInstance(wsdl);
-            conf.setSoapAddress(xpath
-                    .getText("definitions/service/port/address/@location"));
+            init(conf);
         } catch (Exception e) {
             throw new WSDLClientException(e);
         }
     }
 
-    public void init(URL url, Proxy proxy) throws WSDLClientException {
-        Service service = new Service();
-        try {
-            call = (Call) service.createCall();
-        } catch (Exception e) {
-            throw new WSDLClientException(e);
-        }
+    public void init(URL url, boolean use_proxy) throws WSDLClientException {
         conf = new ServiceConf();
         try {
             StringWriter writer = new StringWriter();
-            URLConnection con = url.openConnection(proxy);
+            URLConnection con;
+            if (use_proxy) {
+                con = url.openConnection(proxy);
+            } else {
+                con = url.openConnection();
+            }
             copy(con.getInputStream(), writer);
             conf.setWsdlAddress(url.toString());
             wsdl = writer.toString();
-            xpath = XPathUtils.newInstance(wsdl);
-            conf.setSoapAddress(xpath
-                    .getText("definitions/service/port/address/@location"));
+            init(conf);
         } catch (Exception e) {
             throw new WSDLClientException(e);
         }
@@ -183,6 +197,7 @@ public class WsdlClient {
 
     public Object callService(String namespace, String operationName, Object... params)
             throws MalformedURLException, RemoteException {
+        logger.debug("Configuration: {}", conf);
         call.setTargetEndpointAddress(new URL(conf.getSoapAddress()));
         String soapAction = getSoapActions(operationName);
         if (soapAction != null && soapAction.length() > 0) {

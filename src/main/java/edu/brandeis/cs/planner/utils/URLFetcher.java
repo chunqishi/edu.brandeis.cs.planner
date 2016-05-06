@@ -65,7 +65,7 @@ public class URLFetcher {
                         "connection/credentials/credential[@host='" + host + "' and @port='" + port + "']/username");
                 String password = ConfigXML.config().getString(
                         "connection/credentials/credential[@host='" + host + "' and @port='" + port + "']/password");
-                logger.debug("Credential: Username = {}", username);
+                logger.debug("Credential: Username = '{}'", username);
                 credsProvider.setCredentials(
                         new AuthScope(host, port),
                         new UsernamePasswordCredentials(username, password));

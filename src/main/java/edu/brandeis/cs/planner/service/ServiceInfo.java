@@ -32,7 +32,7 @@ public class ServiceInfo {
     }
 
     public String toURL() {
-        StringBuilder sb = new StringBuilder("invoker/");
+        StringBuilder sb = new StringBuilder("wsdl/");
         sb.append(grid_id);
         sb.append(":");
         sb.append(service_id);
