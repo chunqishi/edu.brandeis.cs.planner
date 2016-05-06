@@ -11,7 +11,7 @@
         </grid>
         <grid>
             <service_manager>
-                http://grid.anc.org:8080//service_manager/
+                http://grid.anc.org:8080/service_manager/
             </service_manager>
             <!--<grid_id>-->
             <!--anc-->

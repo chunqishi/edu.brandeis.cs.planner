@@ -31,6 +31,18 @@ public class WsdlInfo {
     //    List<String> grid_ids = new ArrayList<String>();
     List<List<ServiceInfo>> grid_services = new ArrayList<List<ServiceInfo>>();
 
+    public List<String> getWsdls() {
+        return wsdls;
+    }
+
+    public List<List<ServiceInfo>> getGrid_services() {
+        return grid_services;
+    }
+
+    public List<String> getService_managers() {
+        return service_managers;
+    }
+
     public WsdlInfo() {
         String xmlPath = WsdlInfo.class.getResource("/config.xml").getFile();
         FileBasedConfigurationBuilder<XMLConfiguration> builder =
@@ -59,9 +71,11 @@ public class WsdlInfo {
                 info.setGrid_id(entity.getGridid());
                 info.setService_id(entity.getServiceid());
                 infos.add(info);
+                wsdls.add(info.toWsdl());
             }
             grid_services.add(infos);
         }
+
     }
 
 

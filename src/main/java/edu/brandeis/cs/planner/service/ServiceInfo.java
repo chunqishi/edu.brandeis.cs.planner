@@ -27,11 +27,11 @@ public class ServiceInfo {
     }
 
     public void init() {
-        this.wsdl = this.toURL();
+        this.wsdl = this.toWsdl();
         this.wsdlContent = URLFetcher.getAsString(this.wsdl);
     }
 
-    public String toURL() {
+    public String toWsdl() {
         StringBuilder sb = new StringBuilder("wsdl/");
         sb.append(grid_id);
         sb.append(":");
