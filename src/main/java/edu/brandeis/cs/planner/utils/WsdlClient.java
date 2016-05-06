@@ -121,18 +121,8 @@ public class WsdlClient {
         }
     }
 
-
     public void init(URL url) throws WSDLClientException {
-        conf = new ServiceConf();
-        try {
-            StringWriter writer = new StringWriter();
-            copy(url.openStream(), writer);
-            conf.setWsdlAddress(url.toString());
-            wsdl = writer.toString();
-            init(conf);
-        } catch (Exception e) {
-            throw new WSDLClientException(e);
-        }
+        init(url, true);
     }
 
     public void init(Reader reader) throws WSDLClientException {
@@ -165,7 +155,7 @@ public class WsdlClient {
         try {
             StringWriter writer = new StringWriter();
             URLConnection con;
-            if (use_proxy) {
+            if (use_proxy && proxy != null) {
                 con = url.openConnection(proxy);
             } else {
                 con = url.openConnection();

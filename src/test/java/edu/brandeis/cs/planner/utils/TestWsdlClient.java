@@ -23,9 +23,11 @@ public class TestWsdlClient {
         String wsldString = si.getWsdl();
         System.out.println("WSDL=" + wsldString);
         try {
-            client.init(new StringReader(si.getWsdlContent()));
+//            client.init(new StringReader(si.getWsdlContent()));
+            client.init(wsldString);
             client.authorize("tester", "tester");
-            Object ret = client.callService("", "execute", "How are you today.");
+//            Object ret = client.callService("", "execute", "How are you today.");
+            Object ret = client.callService("", "getMetadata");
             System.out.println(ret.toString());
         } catch (WsdlClient.WSDLClientException e) {
             e.printStackTrace();
