@@ -1,14 +1,13 @@
 package edu.brandeis.cs.planner.service;
 
-import org.apache.commons.collections.ArrayStack;
-import org.apache.commons.configuration2.Configuration;
-import org.apache.commons.configuration2.FileBasedConfiguration;
-import org.apache.commons.configuration2.PropertiesConfiguration;
+import edu.brandeis.cs.planner.db.ServiceEntity;
+import edu.brandeis.cs.planner.db.ServiceManagerDB;
 import org.apache.commons.configuration2.XMLConfiguration;
 import org.apache.commons.configuration2.builder.FileBasedConfigurationBuilder;
 import org.apache.commons.configuration2.builder.fluent.Parameters;
 import org.apache.commons.configuration2.ex.ConfigurationException;
-import org.apache.commons.beanutils.PropertyUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,30 +16,57 @@ import java.util.List;
  * Created by 310201833 on 2016/5/5.
  */
 public class WSDLInfo {
+
+    final static Logger logger = LoggerFactory.getLogger(WSDLInfo.class);
+
     List<String> wsdls = new ArrayList<String>();
 
     Parameters params = new Parameters();
-    public static final String Param_Grid = "grid.service_manager";
-    List<String> grids = new ArrayList<String>();
+    public static final String Param_Grid_ServiceManager = "grid.service_manager";
+    public static final String Param_Grid_GridID = "grid.grid_id";
+
+    XMLConfiguration config = null;
+
+    List<String> service_managers = new ArrayList<String>();
+    List<String> grid_ids = new ArrayList<String>();
+    List<List<ServiceInfo>> grid_services = new ArrayList<List<ServiceInfo>>();
 
     public WSDLInfo() {
-//        System.out.println(WSDLInfo.class.getResource("/lappsgrid.xml").getFile());
+        String xmlPath = WSDLInfo.class.getResource("/lappsgrid.xml").getFile();
         FileBasedConfigurationBuilder<XMLConfiguration> builder =
                 new FileBasedConfigurationBuilder<XMLConfiguration>(XMLConfiguration.class)
-                        .configure(params.xml()
-                                .setFileName(WSDLInfo.class.getResource("/lappsgrid.xml").getFile()));
+                        .configure(params.xml().setFileName(xmlPath));
         try {
-            XMLConfiguration config = builder.getConfiguration();
-//            System.out.println(config.getString("grid.service_manager"));
-            for (String grid : config.getStringArray(Param_Grid))
-                grids.add(grid);
-            System.out.println(grids);
+            config = builder.getConfiguration();
         } catch (ConfigurationException e) {
             e.printStackTrace();
         }
+
+        for (String service_manager : config.getStringArray(Param_Grid_ServiceManager))
+            service_managers.add(service_manager);
+        for (String grid_id : config.getStringArray(Param_Grid_GridID))
+            grid_ids.add(grid_id);
+        logger.debug("ServiceManagers: {}", service_managers);
+        logger.debug("GridIds: {}", grid_ids);
+
+
+        ServiceManagerDB sm = new ServiceManagerDB();
+        List<ServiceEntity> entities = sm.listServices();
+
+        for (int i = 0; i < service_managers.size(); i ++) {
+            List<ServiceInfo> infos = new ArrayList<>();
+            for (ServiceEntity entity: entities) {
+                ServiceInfo info = new ServiceInfo();
+                info.setGrid_id();
+                info.setService_id();
+                info.setService_manager();
+                infos.add(info);
+            }
+            grid_services.add(infos);
+        }
+
+
     }
-
-
 
 
 }
