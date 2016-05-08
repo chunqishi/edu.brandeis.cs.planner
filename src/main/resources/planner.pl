@@ -1,10 +1,21 @@
-%  Some facts about parent relationships
+%  Some facts about categories
+
+
+
 
 parent(sam,mark).
 parent(mark,jim).
 
-%  A general rule
-grandparent(GRANDPARENT,CHILD) :-
-    parent(GRANDPARENT,PARENT),
-    parent(PARENT,CHILD).
+%  Rules
+WorkFlow(A,C,N) :-
+    N > 1,
+    M is N-1
+    WorkFlow(A,B,1),
+    WorkFlow(B,C,M).
+
+
+
+
+
+
 

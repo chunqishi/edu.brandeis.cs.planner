@@ -5,7 +5,7 @@ package edu.brandeis.cs.planner.deduction;
  */
 public class Facts {
 
-    public static enum Categories {Text, Splitter, Tokenizer, Tagger, Chunking, NER, Coreference}
+    public static enum Categories {Text, Splitter, Tokenizer, Tagger, Parser, DependencyParser, Chunking, NER, Coreference}
 
 
     public boolean isCategory(String name, Categories cat) {
