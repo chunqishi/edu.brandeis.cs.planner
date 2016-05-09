@@ -1,6 +1,7 @@
 package edu.brandeis.cs.planner.deduction;
 
 
+import gnu.prolog.database.PrologTextLoaderError;
 import gnu.prolog.term.AtomTerm;
 import gnu.prolog.term.CompoundTerm;
 import gnu.prolog.term.Term;
@@ -15,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 public class PrologEngine {
@@ -33,18 +35,30 @@ public class PrologEngine {
         }
     }
 
+
+
+	private void debug()
+	{
+		List<PrologTextLoaderError> errors = env.getLoadingErrors();
+		for (PrologTextLoaderError error : errors)
+		{
+			error.printStackTrace();
+		}
+	}
+
     public PrologEngine() throws ParseException, PrologException {
         env = new Environment();
-        scriptPath = "/planner.pl";
+        scriptPath = "/planner_template.pl";
         env.ensureLoaded(AtomTerm.get(PrologEngine.class.getResource(scriptPath).getFile()));
         interpreter = env.createInterpreter();
         env.runInitialization(interpreter);
-        String qs = "grandparent(WHO,jim)";
+        String qs = "workflow(a1, a3, N, L)";
         Term query = TermReader.stringToTerm(qs, env);
         Interpreter.Goal goal = interpreter.prepareGoal(query);
         int r = interpreter.execute(goal);
         if (r == PrologCode.FAIL) {
             System.out.println("FAIL");
+            debug();
         } else if (r == PrologCode.SUCCESS_LAST) {
             System.out.println("SUCCESS_LAST");
         } else if (r == PrologCode.SUCCESS) {

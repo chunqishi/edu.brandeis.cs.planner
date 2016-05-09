@@ -3,7 +3,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-use_module(library(clpfd)).
+% use_module(library(clpfd)).
+lib(clpfd).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 %%  Facts
@@ -38,42 +39,42 @@ coreference(b8).
 %%  Rules
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-workflow(A,B,1):-
+workflow(A,B,2,[A,B]):-
     splitter(A),
     tokenizer(B).
 
-workflow(A,B,1):-
+workflow(A,B,2,[A,B]):-
     tokenizer(A),
     tagger(B).
 
-workflow(A,B,1):-
+workflow(A,B,2,[A,B]):-
     tagger(A),
     parser(B).
 
-workflow(A,B,1):-
+workflow(A,B,2,[A,B]):-
     tagger(A),
     dependencyparser(B).
 
-workflow(A,B,1):-
+workflow(A,B,2,[A,B]):-
     tagger(A),
     coreference(B).
 
-workflow(A,B,1):-
+workflow(A,B,2,[A,B]):-
     tagger(A),
     ner(B).
 
-%workflow(A,C,N) :-
-%    N > 1,
+%workflow(A,C,N,[A,B|L]) :-
+%    N > 2,
 %    M is N-1,
-%    workflow(A,B,1),
-%    workflow(B,C,M).
+%    workflow(A,B,1,[A,B]),
+%    workflow(B,C,M,[B|L]).
 
 	
-workflow(A,C,N) :-
-    N #> 1,
+workflow(A,C,N,[A,B|L]) :-
+    N #> 2,
     M #= N-1,
-    workflow(A,B,1),
-    workflow(B,C,M).	
+    workflow(A,B,2,[A,B]),
+    workflow(B,C,M,[B|L]).	
 
 
 
