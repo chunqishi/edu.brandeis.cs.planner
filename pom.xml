@@ -64,7 +64,13 @@
             <version>${lapps.serialization}</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.ugos</groupId>
+            <artifactId>jiprolog</artifactId>
+            <version>4.1.4.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/libs/jiprolog-4.1.4.1.jar</systemPath>
+        </dependency>
 
         <dependency>
             <groupId>gnu</groupId>

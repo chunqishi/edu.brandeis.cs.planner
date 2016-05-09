@@ -2,25 +2,23 @@ package edu.brandeis.cs.planner.deduction;
 
 
 import gnu.prolog.database.PrologTextLoaderError;
-import gnu.prolog.term.AtomTerm;
-import gnu.prolog.term.CompoundTerm;
-import gnu.prolog.term.Term;
+import gnu.prolog.term.*;
 import gnu.prolog.vm.Environment;
 import gnu.prolog.vm.Interpreter;
 import gnu.prolog.vm.PrologCode;
 import gnu.prolog.vm.PrologException;
-import gnu.prolog.term.VariableTerm;
 import gnu.prolog.io.ParseException;
 import gnu.prolog.io.TermReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class PrologEngine {
-    final static Logger logger = LoggerFactory.getLogger(PrologEngine.class);
+public class GnuPrologEngine {
+    final static Logger logger = LoggerFactory.getLogger(GnuPrologEngine.class);
     Environment env;
     Interpreter interpreter;
     String scriptPath;
@@ -46,18 +44,18 @@ public class PrologEngine {
 		}
 	}
 
-    public PrologEngine() throws ParseException, PrologException {
+    public GnuPrologEngine() throws ParseException, PrologException {
         env = new Environment();
-        scriptPath = "/planner_template.pl";
-        env.ensureLoaded(AtomTerm.get(PrologEngine.class.getResource(scriptPath).getFile()));
+        scriptPath = "/planner_template_2.pl";
+        env.ensureLoaded(AtomTerm.get(GnuPrologEngine.class.getResource(scriptPath).getFile()));
         interpreter = env.createInterpreter();
         env.runInitialization(interpreter);
-        String qs = "workflow(a1, a3, N, L)";
+        String qs = "workflow(a1, a3, L)";
         Term query = TermReader.stringToTerm(qs, env);
         Interpreter.Goal goal = interpreter.prepareGoal(query);
         int r = interpreter.execute(goal);
         if (r == PrologCode.FAIL) {
-            System.out.println("FAIL");
+            System.out.println("FAIL ...");
             debug();
         } else if (r == PrologCode.SUCCESS_LAST) {
             System.out.println("SUCCESS_LAST");
@@ -73,7 +71,7 @@ public class PrologEngine {
     }
 
     public static void main(String[] args) throws PrologException, ParseException {
-        PrologEngine pe = new PrologEngine();
+        GnuPrologEngine pe = new GnuPrologEngine();
     }
 
 //
@@ -214,7 +212,7 @@ public class PrologEngine {
 //        env = new Environment();
 //
 //        // get the filename relative to the class file
-//        env.ensureLoaded(AtomTerm.get(PrologEngine.class.getResource("planner.pl").getFile()));
+//        env.ensureLoaded(AtomTerm.get(GnuPrologEngine.class.getResource("planner.pl").getFile()));
 //        // Get the interpreter.
 //        interpreter = env.createInterpreter();
 //        // Run the initialization
