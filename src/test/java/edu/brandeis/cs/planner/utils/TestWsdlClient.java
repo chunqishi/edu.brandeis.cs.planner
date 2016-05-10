@@ -2,6 +2,7 @@ package edu.brandeis.cs.planner.utils;
 
 
 import edu.brandeis.cs.planner.service.ServiceInfo;
+import junit.framework.Assert;
 import org.junit.Test;
 
 import java.io.StringReader;
@@ -29,6 +30,7 @@ public class TestWsdlClient {
 //            Object ret = client.callService("", "execute", "How are you today.");
             Object ret = client.callService("", "getMetadata");
             System.out.println(ret.toString());
+            Assert.assertTrue(ret.toString().contains("discriminator"));
         } catch (WsdlClient.WSDLClientException e) {
             e.printStackTrace();
         }
