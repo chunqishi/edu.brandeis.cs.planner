@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestWsdlInfo_ {
+public class TestWsdlInfo {
 
     @Test
     public void test(){
