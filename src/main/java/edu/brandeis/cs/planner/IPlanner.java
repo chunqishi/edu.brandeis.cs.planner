@@ -11,6 +11,6 @@ public interface IPlanner extends WebService {
 
     String[][] listMetadata();
 
-    String[][] listMetadataAsFlat();
+    String[][] listMetadataAsFlat(int hint);
 
 }

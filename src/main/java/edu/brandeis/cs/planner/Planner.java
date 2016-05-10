@@ -117,18 +117,27 @@ public class Planner implements IPlanner {
     }
 
     @Override
-    public String[][] listMetadataAsFlat() {
+    public String[][] listMetadataAsFlat(int hint) {
         Map<String, Object[]> byids = facts.getByIds();
         String[][] metadata = new String[byids.size()][];
         int i = 0;
         for (String id : byids.keySet()) {
             String json = byids.get(id)[3].toString();
-            JsonReader reader = new JsonReader(json);
-            metadata[i] = new String[]{id,
-                    reader.read("payload.produces.annotations"),
-                    reader.read("payload.produces.format"),
-                    reader.read("payload.requires.annotations"),
-                    reader.read("payload.requires.format")};
+            if (hint == 1) {
+                JsonReader reader = new JsonReader(json);
+                metadata[i] = new String[]{id,
+                        reader.read("payload.produces.annotations"),
+                        reader.read("payload.produces.format"),
+                        reader.read("payload.requires.annotations"),
+                        reader.read("payload.requires.format")};
+            } else {
+                List<String> kv = JsonReader.flatJson(json);
+                metadata[i] = new String[kv.size() + 1];
+                metadata[i][0] = id;
+                for (int j = 0; j < kv.size(); j++) {
+                    metadata[i][j + 1] = kv.get(j);
+                }
+            }
             i++;
         }
         return metadata;
