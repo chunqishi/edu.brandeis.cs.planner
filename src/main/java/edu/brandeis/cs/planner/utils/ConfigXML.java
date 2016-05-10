@@ -25,7 +25,7 @@ public class ConfigXML {
     }
 
     protected ConfigXML() {
-        this(ConfigXML.class.getResource("/config.xml").getFile());
+        this(ConfigXML.class.getResource("/config.xml").getPath());
     }
 
     public ConfigXML(String xmlPath) {
