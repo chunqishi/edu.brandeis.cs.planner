@@ -116,7 +116,6 @@ public class Planner implements IPlanner {
         return metadata;
     }
 
-
     @Override
     public String[][] listMetadataAsFlat() {
         Map<String, Object[]> byids = facts.getByIds();
@@ -124,15 +123,33 @@ public class Planner implements IPlanner {
         int i = 0;
         for (String id : byids.keySet()) {
             String json = byids.get(id)[3].toString();
-            List<String> kv = JsonReader.flatJson(json);
-            metadata[i] = new String[kv.size() + 1];
-            metadata[i][0] = id;
-            for (int j = 0; j < kv.size(); j++) {
-                metadata[i][j + 1] = kv.get(j);
-            }
+            JsonReader reader = new JsonReader(json);
+            metadata[i] = new String[]{id,
+                    reader.read("payload.produces.annotations"),
+                    reader.read("payload.produces.format"),
+                    reader.read("payload.requires.annotations"),
+                    reader.read("payload.requires.format")};
             i++;
         }
         return metadata;
     }
+
+//    @Override
+//    public String[][] listMetadataAsFlat() {
+//        Map<String, Object[]> byids = facts.getByIds();
+//        String[][] metadata = new String[byids.size()][];
+//        int i = 0;
+//        for (String id : byids.keySet()) {
+//            String json = byids.get(id)[3].toString();
+//            List<String> kv = JsonReader.flatJson(json);
+//            metadata[i] = new String[kv.size() + 1];
+//            metadata[i][0] = id;
+//            for (int j = 0; j < kv.size(); j++) {
+//                metadata[i][j + 1] = kv.get(j);
+//            }
+//            i++;
+//        }
+//        return metadata;
+//    }
 }
 
