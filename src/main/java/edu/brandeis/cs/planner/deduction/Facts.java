@@ -72,7 +72,12 @@ public class Facts {
                 break;
             }
         }
-        fact.append("('").append(id.toLowerCase()).append("')");
+        // special case.
+        if (text.contains("namedentity")) {
+            fact.append("ner");
+        }
+
+        fact.append("('").append(id.toLowerCase()).append("').");
         return fact.toString();
     }
 
