@@ -9,14 +9,14 @@
             <!--brandeis_eldrad_grid_1-->
             <!--</grid_id>-->
         </grid>
-        <grid>
-            <service_manager>
-                http://grid.anc.org:8080/service_manager/
-            </service_manager>
-            <!--<grid_id>-->
-            <!--anc-->
-            <!--</grid_id>-->
-        </grid>
+        <!--<grid>-->
+            <!--<service_manager>-->
+                <!--http://grid.anc.org:8080/service_manager/-->
+            <!--</service_manager>-->
+            <!--&lt;!&ndash;<grid_id>&ndash;&gt;-->
+            <!--&lt;!&ndash;anc&ndash;&gt;-->
+            <!--&lt;!&ndash;</grid_id>&ndash;&gt;-->
+        <!--</grid>-->
     </grids>
     <connection>
         <timeout>3</timeout>
