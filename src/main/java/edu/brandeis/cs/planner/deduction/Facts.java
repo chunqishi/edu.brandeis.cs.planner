@@ -61,8 +61,8 @@ public class Facts {
         StringBuilder fact = new StringBuilder();
         String id = entity.getServiceid();
         JsonReader reader = new JsonReader(metajson);
-        String classname = reader.read("$payload.name");
-        String description = reader.read("$payload.description");
+        String classname = reader.read("payload.name");
+        String description = reader.read("payload.description");
         String text = id + classname + description;
         text = text.toLowerCase();
         for (Categories cat : Categories.values()) {
