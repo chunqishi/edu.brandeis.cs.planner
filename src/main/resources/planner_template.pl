@@ -1,7 +1,6 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Facts
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 splitter(a1).
 splitter(b1).
 
@@ -27,40 +26,42 @@ dependencyparser(b7).
 coreference(a8).
 coreference(b8).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Rules
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-workflow(A,B,2,[A,B]):-
+pipeline(A,B):-
     splitter(A),
     tokenizer(B).
 
-workflow(A,B,2,[A,B]):-
+pipeline(A,B):-
     tokenizer(A),
     tagger(B).
 
-workflow(A,B,2,[A,B]):-
+pipeline(A,B):-
     tagger(A),
     parser(B).
 
-workflow(A,B,2,[A,B]):-
+pipeline(A,B):-
     tagger(A),
     dependencyparser(B).
 
-workflow(A,B,2,[A,B]):-
+pipeline(A,B):-
     tagger(A),
     coreference(B).
 
-workflow(A,B,2,[A,B]):-
+pipeline(A,B):-
     tagger(A),
     ner(B).
 
-workflow(A,C,N,[A,B|L]) :-
-    #>(N,2),
-    #=(M,N-1),
-    workflow(A,B,2,[A,B]),
-    workflow(B,C,M,[B|L]).
-	
-	
+workflow(A,B,[A,B]):-
+    pipeline(A,B).
+
+workflow(A,C,[A,B|L]):-
+    pipeline(A,B),
+    workflow(B,C,[B|L]).
+
+
+
 
 

@@ -46,7 +46,7 @@ public class GnuPrologEngine {
 
     public GnuPrologEngine() throws ParseException, PrologException {
         env = new Environment();
-        scriptPath = "/planner_template_2.pl";
+        scriptPath = "/planner_template.pl";
         env.ensureLoaded(AtomTerm.get(GnuPrologEngine.class.getResource(scriptPath).getFile()));
         interpreter = env.createInterpreter();
         env.runInitialization(interpreter);
