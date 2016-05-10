@@ -100,5 +100,11 @@ public class Planner implements IPlanner {
         }
         return solutions;
     }
+
+    @Override
+    public String[] listServices() {
+        Map<String, Object[]> byids = facts.getByIds();
+        return byids.keySet().toArray(new String[byids.size()]);
+    }
 }
 

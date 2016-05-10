@@ -65,7 +65,6 @@ public class JIPrologEngine {
         List<Map<String, String>> all = new ArrayList<>();
         while (jipQuery.hasMoreChoicePoints()) {
             solution = jipQuery.nextSolution();
-            System.out.println(solution);
             if (solution == null)
                 break;
             JIPVariable[] vars = solution.getVariables();
@@ -74,8 +73,6 @@ public class JIPrologEngine {
                 if (!var.isAnonymous()) {
                     map.put(var.getName(), var.toString(jip));
                     logger.debug(var.getName() + " = ", var.toString(jip));
-//                    System.out.print(var.getName() + " = " + var.toString(jip) + " ");
-//                    System.out.println();
                 }
             }
             all.add(map);

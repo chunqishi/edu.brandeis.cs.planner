@@ -6,4 +6,6 @@ public interface IPlanner extends WebService {
     String pipeline(String start, String end);
 
     String[] pipelines(String start, String end);
+
+    String [] listServices();
 }
