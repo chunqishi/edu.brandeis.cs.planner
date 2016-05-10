@@ -17,6 +17,6 @@ public class TestMetadata {
         List<String> wsdls = new ArrayList<>();
         wsdls.add(wsdl);
         Metadata mt = new Metadata(wsdls);
-        
+
     }
 }

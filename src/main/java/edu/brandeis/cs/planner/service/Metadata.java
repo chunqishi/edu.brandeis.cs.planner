@@ -68,7 +68,8 @@ public class Metadata {
 
     List<String> wsdls = new ArrayList<String>();
     List<String> metadataJsons = new ArrayList<String>();
-
+    String username;
+    String password;
     public Metadata(List<String> wsdls) {
         this.wsdls.addAll(wsdls);
         init();
@@ -100,14 +101,13 @@ public class Metadata {
             URL url = new URL(service_manager);
             String host = url.getHost();
             int port = url.getPort();
-            String username = ConfigXML.config().getString(
+            username = ConfigXML.config().getString(
                     "connection/credentials/credential[@host='" + host + "' and @port='" + port + "']/username");
-            String password = ConfigXML.config().getString(
+            password = ConfigXML.config().getString(
                     "connection/credentials/credential[@host='" + host + "' and @port='" + port + "']/password");
             logger.debug("host={}", host);
             logger.debug("port={}", port);
             logger.debug("username={}", username);
-            client.authorize(username, password);
         } catch (MalformedURLException e) {
             logger.warn("Wrong Service Manager", e);
             e.printStackTrace();
@@ -123,6 +123,7 @@ public class Metadata {
         logger.debug("WSDL = {}", wsldString);
         try {
             client.init(wsldString);
+            client.authorize(username, password);
             Object ret = client.callService("", "getMetadata");
             return ret.toString();
         } catch (Exception e) {
