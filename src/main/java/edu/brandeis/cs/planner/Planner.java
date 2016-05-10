@@ -64,14 +64,16 @@ public class Planner implements IPlanner {
         StringBuilder sb = new StringBuilder();
         String from = null;
         String to = null;
-        if (facts.isCategory(start)) {
+        if (start.equals("text")) {
+            from = "text";
+        } else if (facts.isCategory(start)) {
             sb.append(start.toLowerCase()).append("(From),");
             from = "From";
         } else if (facts.isServiceId(start)) {
             from = "'" + start + "'";
         }
         if (facts.isCategory(end)) {
-            sb.append(start.toLowerCase()).append("(To),");
+            sb.append(end.toLowerCase()).append("(To),");
             to = "To";
         } else if (facts.isServiceId(end)) {
             to = "'" + end + "'";
