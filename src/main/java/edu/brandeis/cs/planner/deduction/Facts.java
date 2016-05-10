@@ -22,11 +22,11 @@ public class Facts {
         text, splitter, tokenizer, tagger, parser, dependencyParser, chunking, ner, coreference
     }
 
-    public List<String> facts = new ArrayList<String>();
-
-    public boolean isCategory(String name, Categories cat) {
-        return false;
+    public List<String> getFacts() {
+        return facts;
     }
+
+    private List<String> facts = new ArrayList<String>();
 
     protected String genFact(ServiceEntity entity, ServiceInfo info, String wsdl, String metajson) {
         StringBuilder fact = new StringBuilder();

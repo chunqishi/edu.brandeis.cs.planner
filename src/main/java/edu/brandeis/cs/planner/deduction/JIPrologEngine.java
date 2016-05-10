@@ -23,24 +23,17 @@ import java.util.Map;
  */
 public class JIPrologEngine {
     private final static Logger logger = LoggerFactory.getLogger(JIPrologEngine.class);
-    private String scriptPath = "/planner_template.pl";
-    private String rules = null;
     public static final String NewLine = System.getProperty("line.separator");
 
-    public JIPrologEngine() throws IOException {
-        rules = getFileAsString(scriptPath);
-    }
 
-    public JIPrologEngine(String scriptPath) throws IOException {
-        rules = getFileAsString(scriptPath);
-    }
-
-    public Map<String, Object> queryFactsWithGoal(List<String> factsStrings, String goalString) {
+    public static Map<String, Object> queryFactsWithGoal(List<String> factsStrings, List<String> ruleStrings, String goalString) {
         StringBuilder sb = new StringBuilder();
         for (String factString : factsStrings) {
             sb.append(factsStrings).append(NewLine);
         }
-        sb.append(rules);
+        for (String ruleString : ruleStrings) {
+            sb.append(ruleString).append(NewLine);
+        }
         JIPEngine jip = init(sb.toString());
         Map<String, Object> res = queryGoal(jip, goalString);
         return res;
@@ -53,9 +46,6 @@ public class JIPrologEngine {
         return jip;
     }
 
-    public static String getFileAsString(String path) throws IOException {
-        return IOUtils.toString(new FileInputStream(new File(JIPrologEngine.class.getResource(path).getFile())));
-    }
 
     protected static JIPEngine init(String scriptString) {
         JIPEngine jip = new JIPEngine();
