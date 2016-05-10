@@ -27,14 +27,15 @@ public class JIPrologEngine {
     public static final String NewLine = System.getProperty("line.separator");
 
 
-    public static List<Map<String, String>> queryFactsWithGoal(List<String> factsStrings, List<String> ruleStrings, String goalString) {
+    public static List<Map<String, String>> queryFactsWithGoal(List<String> factStrings, List<String> ruleStrings, String goalString) {
         StringBuilder sb = new StringBuilder();
-        for (String factString : factsStrings) {
-            sb.append(factsStrings).append(NewLine);
+        for (String factString : factStrings) {
+            sb.append(factString).append(NewLine);
         }
         for (String ruleString : ruleStrings) {
             sb.append(ruleString).append(NewLine);
         }
+        logger.debug("Facts & Rules: \n {}", sb);
         JIPEngine jip = init(sb.toString());
         List<Map<String, String>> res = queryGoal(jip, goalString);
         return res;

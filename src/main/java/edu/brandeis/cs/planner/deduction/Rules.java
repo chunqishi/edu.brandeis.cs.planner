@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Rules {
 
-    private String scriptPath = "/planner_template.pl";
+    private String scriptPath = "/planner.pl";
 
 
     private List<String> rules = new ArrayList<>();
@@ -29,6 +29,6 @@ public class Rules {
     }
 
     public static String getFileAsString(String path) throws IOException {
-        return IOUtils.toString(new FileInputStream(new File(JIPrologEngine.class.getResource(path).getFile())));
+        return IOUtils.toString(new FileInputStream(new File(Rules.class.getResource(path).getFile())));
     }
 }
