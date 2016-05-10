@@ -11,7 +11,7 @@ import java.rmi.RemoteException;
 
 public class TestWsdlClient {
 
-    @Test
+//    @Test
     public void test() throws MalformedURLException, RemoteException {
         System.out.println("TEST..." + this.getClass());
         WsdlClient client = new WsdlClient();
