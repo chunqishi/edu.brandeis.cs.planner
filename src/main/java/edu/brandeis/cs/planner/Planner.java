@@ -6,13 +6,10 @@ import edu.brandeis.cs.planner.db.ServiceManagerDB;
 import edu.brandeis.cs.planner.deduction.Facts;
 import edu.brandeis.cs.planner.deduction.JIPrologEngine;
 import edu.brandeis.cs.planner.deduction.Rules;
-import edu.brandeis.cs.planner.utils.WsdlClient;
+import edu.brandeis.cs.planner.utils.JsonReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.rmi.RemoteException;
 import java.util.List;
 import java.util.Map;
 
@@ -112,9 +109,28 @@ public class Planner implements IPlanner {
         Map<String, Object[]> byids = facts.getByIds();
         String[][] metadata = new String[byids.size()][];
         int i = 0;
-        for (String id: byids.keySet()){
+        for (String id : byids.keySet()) {
             metadata[i] = new String[]{id, byids.get(id)[3].toString()};
-            i ++;
+            i++;
+        }
+        return metadata;
+    }
+
+
+    @Override
+    public String[][] listMetadataAsFlat() {
+        Map<String, Object[]> byids = facts.getByIds();
+        String[][] metadata = new String[byids.size()][];
+        int i = 0;
+        for (String id : byids.keySet()) {
+            String json = byids.get(id)[3].toString();
+            List<String> kv = JsonReader.flatJson(json);
+            metadata[i] = new String[kv.size() + 1];
+            metadata[i][0] = id;
+            for (int j = 0; j < kv.size(); j++) {
+                metadata[i][j + 1] = kv.get(j);
+            }
+            i++;
         }
         return metadata;
     }

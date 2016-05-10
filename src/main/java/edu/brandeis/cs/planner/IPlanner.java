@@ -10,4 +10,7 @@ public interface IPlanner extends WebService {
     String [] listServices();
 
     String[][] listMetadata();
+
+    String[][] listMetadataAsFlat();
+
 }

@@ -37,5 +37,6 @@ public class TestJsonReader {
         JsonReader reader = new JsonReader(jsonString);
         System.out.println(reader.read("payload.name"));
         System.out.println(reader.read("payload.description"));
+        System.out.println(JsonReader.flatJson(jsonString));
     }
 }
