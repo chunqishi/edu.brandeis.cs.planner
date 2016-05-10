@@ -72,7 +72,7 @@ public class JIPrologEngine {
             for (JIPVariable var : vars) {
                 if (!var.isAnonymous()) {
                     map.put(var.getName(), var.toString(jip));
-                    logger.debug(var.getName() + " = ", var.toString(jip));
+                    logger.debug(var.getName() + " = {}", var.toString(jip));
                 }
             }
             all.add(map);
