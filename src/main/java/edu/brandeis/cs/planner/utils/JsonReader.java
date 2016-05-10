@@ -25,7 +25,7 @@ public class JsonReader {
     }
 
     public String read(String jsonpath) {
-        return context.read(jsonpath);
+        return context.read(jsonpath).toString();
     }
 
 

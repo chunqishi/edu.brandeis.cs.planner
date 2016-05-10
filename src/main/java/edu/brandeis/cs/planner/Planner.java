@@ -125,10 +125,10 @@ public class Planner implements IPlanner {
             String json = byids.get(id)[3].toString();
             JsonReader reader = new JsonReader(json);
             metadata[i] = new String[]{id,
-                    reader.read("payload.produces.annotations").toString(),
-                    reader.read("payload.produces.format").toString(),
-                    reader.read("payload.requires.annotations").toString(),
-                    reader.read("payload.requires.format").toString()};
+                    reader.read("payload.produces.annotations"),
+                    reader.read("payload.produces.format"),
+                    reader.read("payload.requires.annotations"),
+                    reader.read("payload.requires.format")};
             i++;
         }
         return metadata;
