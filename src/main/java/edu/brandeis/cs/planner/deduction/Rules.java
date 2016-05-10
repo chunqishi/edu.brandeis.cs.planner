@@ -16,6 +16,10 @@ public class Rules {
 
     private List<String> rules = new ArrayList<>();
 
+    public List<String> getRules() {
+        return rules;
+    }
+
     public Rules() throws IOException {
         rules.add(getFileAsString(scriptPath));
     }

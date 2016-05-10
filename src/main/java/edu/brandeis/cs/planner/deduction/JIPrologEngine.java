@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class JIPrologEngine {
     public static final String NewLine = System.getProperty("line.separator");
 
 
-    public static Map<String, Object> queryFactsWithGoal(List<String> factsStrings, List<String> ruleStrings, String goalString) {
+    public static List<Map<String, String>> queryFactsWithGoal(List<String> factsStrings, List<String> ruleStrings, String goalString) {
         StringBuilder sb = new StringBuilder();
         for (String factString : factsStrings) {
             sb.append(factsStrings).append(NewLine);
@@ -35,7 +36,7 @@ public class JIPrologEngine {
             sb.append(ruleString).append(NewLine);
         }
         JIPEngine jip = init(sb.toString());
-        Map<String, Object> res = queryGoal(jip, goalString);
+        List<Map<String, String>> res = queryGoal(jip, goalString);
         return res;
     }
 
@@ -55,27 +56,30 @@ public class JIPrologEngine {
         return jip;
     }
 
-    protected static Map<String, Object> queryGoal(JIPEngine jip, String goalString) {
+    protected static List<Map<String, String>> queryGoal(JIPEngine jip, String goalString) {
+        logger.debug("Goal: {}", goalString);
         JIPQuery jipQuery = jip.openSynchronousQuery(goalString);
         JIPTerm solution;
-        Map res = new LinkedHashMap<String, Object>();
         // Loop while there is another solution
+        List<Map<String, String>> all = new ArrayList<>();
         while (jipQuery.hasMoreChoicePoints()) {
             solution = jipQuery.nextSolution();
             System.out.println(solution);
             if (solution == null)
                 break;
             JIPVariable[] vars = solution.getVariables();
+            Map map = new LinkedHashMap<String, String>();
             for (JIPVariable var : vars) {
                 if (!var.isAnonymous()) {
-                    res.put(var.getName(), var.toString(jip));
+                    map.put(var.getName(), var.toString(jip));
                     logger.debug(var.getName() + " = ", var.toString(jip));
 //                    System.out.print(var.getName() + " = " + var.toString(jip) + " ");
 //                    System.out.println();
                 }
             }
+            all.add(map);
         }
-        return res;
+        return all;
     }
 
 //

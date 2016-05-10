@@ -10,8 +10,7 @@ import edu.brandeis.cs.planner.utils.WsdlClient;
 
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by 310201833 on 2016/5/6.
@@ -19,12 +18,42 @@ import java.util.List;
 public class Facts {
 
     public static enum Categories {
-        text, splitter, tokenizer, tagger, parser, dependencyParser, chunking, ner, coreference
+        splitter, tokenizer, tagger, parser, dependencyParser, chunking, ner, coreference
     }
+
+    public static List<String> CategoryNames = new ArrayList<>();
+
+
+    public boolean isServiceId(String text) {
+        text = text.trim();
+        return facts.contains(text);
+    }
+
+    public boolean isCategory(String text) {
+        text = text.trim().toLowerCase();
+        return CategoryNames.contains(text);
+    }
+
+//
+//    public String getCategory(String text) {
+//        text = text.trim().toLowerCase();
+//        if (facts.contains(text)) {
+//            // service id;
+//
+//        } else if (CategoryNames.contains(text)) {
+//            return text;
+//        }
+//    }
 
     public List<String> getFacts() {
         return facts;
     }
+
+    public Map<String, Object[]> getByIds() {
+        return byIds;
+    }
+
+    Map<String, Object[]> byIds = new HashMap<>();
 
     private List<String> facts = new ArrayList<String>();
 
@@ -47,15 +76,22 @@ public class Facts {
         return fact.toString();
     }
 
-    public Facts() throws WsdlClient.WSDLClientException, MalformedURLException, RemoteException {
-        ServiceManagerDB sm = new ServiceManagerDB();
-        List<ServiceEntity> entities = sm.listServices();
+    public Facts(List<ServiceEntity> entities) throws WsdlClient.WSDLClientException, MalformedURLException, RemoteException {
+        for (Categories cat : Categories.values()) {
+            CategoryNames.add(cat.name());
+        }
         WsdlInfo info = new WsdlInfo(entities);
         List<List<ServiceInfo>> services = info.getGrid_services();
         List<String> wsdls = info.getWsdls();
         Metadata meta = new Metadata(wsdls);
         List<String> metajsons = meta.getMetadataJsons();
         for (int i = 0; i < entities.size(); i++) {
+            byIds.put(entities.get(i).getServiceid(), new Object[]{
+                    entities.get(i),
+                    services.get(0).get(i),
+                    wsdls.get(i),
+                    metajsons.get(i)
+            });
             String fact = genFact(entities.get(i), services.get(0).get(i), wsdls.get(i), metajsons.get(i));
             facts.add(fact);
         }
