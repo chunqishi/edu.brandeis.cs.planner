@@ -51,3 +51,21 @@ http://www.cs.bris.ac.uk/~steve/wp/
 Prolog:
 ------------------------------------------------------------------------------------------------------------------------
 http://stackoverflow.com/questions/2564058/search-all-paths-and-the-shortest-path-for-a-graph-prolog
+
+
+========================================================================================================================
+
+------------------------------------------------------------------------------------------------------------------------
+Deploy:
+------------------------------------------------------------------------------------------------------------------------
+cd /local/eldrad/users/lapps/Project/chunqishi/edu.brandeis.cs.planner/
+git pull
+mvn clean package
+
+cp /local/eldrad/users/lapps/Project/chunqishi/edu.brandeis.cs.planner/target/planner#0.0.1-SNAPSHOT.war /local/eldrad/users/lapps/tomcat7/8282/webapps/
+cd  /local/eldrad/users/lapps/tomcat7/8282/webapps/
+rm -r planner#0.0.1-SNAPSHOT
+tail -f ../logs/catalina.out
+
+
+http://eldrad.cs-i.brandeis.edu:8282/planner/0.0.1-SNAPSHOT/jsServices

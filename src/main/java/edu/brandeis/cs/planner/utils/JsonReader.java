@@ -48,7 +48,6 @@ public class JsonReader {
             String subkey;
             if (key != null && key.length() > 1) {
                 subkey = key + "." + keyStr;
-                sb.append(subkey);
             } else {
                 subkey = keyStr;
             }
