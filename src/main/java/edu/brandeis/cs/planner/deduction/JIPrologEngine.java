@@ -27,7 +27,7 @@ public class JIPrologEngine {
     public static final String NewLine = System.getProperty("line.separator");
 
 
-    public static List<Map<String, String>> queryFactsWithGoal(List<String> factStrings, List<String> ruleStrings, String goalString) {
+    public static List<Map<String, String>> queryFactsWithGoal(List<String> factStrings, List<String> ruleStrings, String goalString, boolean isAll) {
         StringBuilder sb = new StringBuilder();
         for (String factString : factStrings) {
             sb.append(factString).append(NewLine);
@@ -37,7 +37,7 @@ public class JIPrologEngine {
         }
         logger.debug("Facts & Rules: \n {}", sb);
         JIPEngine jip = init(sb.toString());
-        List<Map<String, String>> res = queryGoal(jip, goalString);
+        List<Map<String, String>> res = queryGoal(jip, goalString, isAll);
         return res;
     }
 
@@ -57,7 +57,7 @@ public class JIPrologEngine {
         return jip;
     }
 
-    protected static List<Map<String, String>> queryGoal(JIPEngine jip, String goalString) {
+    protected static List<Map<String, String>> queryGoal(JIPEngine jip, String goalString, boolean isAll) {
         logger.debug("Goal: {}", goalString);
         JIPQuery jipQuery = jip.openSynchronousQuery(goalString);
         JIPTerm solution;
@@ -79,6 +79,8 @@ public class JIPrologEngine {
                 }
             }
             all.add(map);
+            if(!isAll)
+                break;
         }
         return all;
     }

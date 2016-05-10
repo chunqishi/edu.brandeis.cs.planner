@@ -23,11 +23,11 @@ public class Planner implements IPlanner {
         System.out.print("Planner");
     }
 
-    List<String> factList = null;
-    List<String> ruleList;
-    Facts facts;
+    static List<String> factList = null;
+    static List<String> ruleList;
+    static Facts facts;
 
-    public Planner() {
+    static {
         try {
             ServiceManagerDB sm = new ServiceManagerDB();
             List<ServiceEntity> entities = sm.listServices();
@@ -37,6 +37,9 @@ public class Planner implements IPlanner {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public Planner() {
     }
 
     @Override
@@ -51,14 +54,17 @@ public class Planner implements IPlanner {
 
     @Override
     public String pipeline(String start, String end) {
-        String[] res = pipelines(start, end);
-        if (res.length > 0)
-            return res[0];
-        return null;
+        String goal = prepareGoal(start, end);
+        List<Map<String, String>> res = JIPrologEngine.queryFactsWithGoal(factList, ruleList, goal, false);
+        String[] solutions = new String[res.size()];
+        for (int i = 0; i < res.size(); i++) {
+            Map<String, String> map = res.get(i);
+            solutions[i] = map.get("Pipeline");
+        }
+        return solutions[0];
     }
 
-    @Override
-    public String[] pipelines(String start, String end) {
+    protected String prepareGoal(String start, String end) {
         start = start.trim();
         end = end.trim();
         StringBuilder sb = new StringBuilder();
@@ -80,7 +86,13 @@ public class Planner implements IPlanner {
         }
         sb.append("workflow(").append(from).append(",").append(to).append(", Pipeline).");
         logger.debug("Goal: {}", sb);
-        List<Map<String, String>> res = JIPrologEngine.queryFactsWithGoal(factList, ruleList, sb.toString());
+        return sb.toString();
+    }
+
+    @Override
+    public String[] pipelines(String start, String end) {
+        String goal = prepareGoal(start, end);
+        List<Map<String, String>> res = JIPrologEngine.queryFactsWithGoal(factList, ruleList, goal, true);
         String[] solutions = new String[res.size()];
         for (int i = 0; i < res.size(); i++) {
             Map<String, String> map = res.get(i);
