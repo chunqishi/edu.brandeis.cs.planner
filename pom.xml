@@ -21,6 +21,10 @@
             <!--<id></id>-->
             <!--<url></url>-->
         <!--</repository>-->
+        <repository>
+            <id>my-local-repo</id>
+            <url>file://${project.basedir}/src/main/resources/libs/</url>
+        </repository>
     </repositories>
 
     <properties>
@@ -65,19 +69,15 @@
         </dependency>
 
         <dependency>
-            <groupId>com.ugos</groupId>
+            <groupId>jiprolog</groupId>
             <artifactId>jiprolog</artifactId>
             <version>4.1.4.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/libs/jiprolog-4.1.4.1.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>gnu</groupId>
-            <artifactId>gnuprolog</artifactId>
+            <groupId>gnuprolog</groupId>
+            <artifactId>gnuprologjava</artifactId>
             <version>0.2.6</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/libs/gnuprologjava-0.2.6.jar</systemPath>
         </dependency>
 
         <dependency>
