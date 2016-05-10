@@ -68,13 +68,13 @@ public class Planner implements IPlanner {
             sb.append(start.toLowerCase()).append("(From),");
             from = "From";
         } else if (facts.isServiceId(start)) {
-            from = start;
+            from = "'" + start + "'";
         }
         if (facts.isCategory(end)) {
             sb.append(start.toLowerCase()).append("(To),");
             to = "To";
         } else if (facts.isServiceId(end)) {
-            to = end;
+            to = "'" + end + "'";
         }
         sb.append("workflow(").append(from).append(",").append(to).append(", Pipeline).");
         logger.debug("Goal: {}", sb);

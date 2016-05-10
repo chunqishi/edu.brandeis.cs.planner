@@ -72,9 +72,15 @@ public class Facts {
                 break;
             }
         }
-        fact.append("(").append(id.toLowerCase()).append(")");
+        fact.append("('").append(id.toLowerCase()).append("')");
         return fact.toString();
     }
+
+//    public String filter(String id) {
+//
+//    }
+//    private Map<String,String> filterMap = new HashMap<>();
+//    private Map<String,String> unfilterMap = new HashMap<>();
 
     public Facts(List<ServiceEntity> entities) throws WsdlClient.WSDLClientException, MalformedURLException, RemoteException {
         for (Categories cat : Categories.values()) {

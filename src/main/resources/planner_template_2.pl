@@ -5,7 +5,7 @@
 splitter(a1).
 splitter(b1).
 
-tokenizer(a2).
+tokenizer('a2.asdf').
 tokenizer(b2).
 
 tagger(a3).
