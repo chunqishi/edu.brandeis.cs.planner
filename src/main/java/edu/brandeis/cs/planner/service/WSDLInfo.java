@@ -43,7 +43,7 @@ public class WsdlInfo {
         return service_managers;
     }
 
-    public WsdlInfo() {
+    public WsdlInfo(List<ServiceEntity> entities) {
         String xmlPath = WsdlInfo.class.getResource("/config.xml").getFile();
         FileBasedConfigurationBuilder<XMLConfiguration> builder =
                 new FileBasedConfigurationBuilder<XMLConfiguration>(XMLConfiguration.class)
@@ -59,8 +59,8 @@ public class WsdlInfo {
 //            grid_ids.add(grid_id);
         logger.debug("ServiceManagers: {}", service_managers);
 //        logger.debug("GridIds: {}", grid_ids);
-        ServiceManagerDB sm = new ServiceManagerDB();
-        List<ServiceEntity> entities = sm.listServices();
+//        ServiceManagerDB sm = new ServiceManagerDB();
+//        List<ServiceEntity> entities = sm.listServices();
         for (int i = 0; i < service_managers.size(); i++) {
             String service_manager = service_managers.get(i);
 //            String grid_id = grid_ids.get(i);

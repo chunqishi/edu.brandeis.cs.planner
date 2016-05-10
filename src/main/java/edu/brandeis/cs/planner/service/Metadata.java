@@ -1,7 +1,9 @@
 package edu.brandeis.cs.planner.service;
 
 import edu.brandeis.cs.planner.utils.ConfigXML;
+import edu.brandeis.cs.planner.utils.JsonReader;
 import edu.brandeis.cs.planner.utils.WsdlClient;
+import jp.go.nict.langrid.repackaged.net.arnx.jsonic.JSON;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
@@ -70,6 +72,18 @@ public class Metadata {
     public Metadata(List<String> wsdls) {
         this.wsdls.addAll(wsdls);
         init();
+    }
+
+    public List<String> getMetadataJsons() {
+        return metadataJsons;
+    }
+
+    public List<JsonReader> toJsonReaders() {
+        List<JsonReader> readers = new ArrayList<JsonReader>();
+        for (String jsonString: metadataJsons) {
+            readers.add(new JsonReader(jsonString));
+        }
+        return readers;
     }
 
     public Metadata() {
