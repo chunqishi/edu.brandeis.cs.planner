@@ -27,7 +27,7 @@ public class JIPrologEngine {
     public static final String NewLine = System.getProperty("line.separator");
 
 
-    public static List<Map<String, String>> queryFactsWithGoal(List<String> factStrings, List<String> ruleStrings, String goalString, boolean isAll) {
+    public static List<Map<String, String>> queryFactsWithGoal(List<String> factStrings, List<String> ruleStrings, String goalString, int topN) {
         StringBuilder sb = new StringBuilder();
         for (String factString : factStrings) {
             sb.append(factString).append(NewLine);
@@ -37,7 +37,7 @@ public class JIPrologEngine {
         }
         logger.debug("Facts & Rules: \n {}", sb);
         JIPEngine jip = init(sb.toString());
-        List<Map<String, String>> res = queryGoal(jip, goalString, isAll);
+        List<Map<String, String>> res = queryGoal(jip, goalString, topN);
         return res;
     }
 
@@ -57,12 +57,13 @@ public class JIPrologEngine {
         return jip;
     }
 
-    protected static List<Map<String, String>> queryGoal(JIPEngine jip, String goalString, boolean isAll) {
+    protected static List<Map<String, String>> queryGoal(JIPEngine jip, String goalString, int topN) {
         logger.debug("Goal: {}", goalString);
         JIPQuery jipQuery = jip.openSynchronousQuery(goalString);
         JIPTerm solution;
         // Loop while there is another solution
         List<Map<String, String>> all = new ArrayList<>();
+        int count = 0;
         while (jipQuery.hasMoreChoicePoints()) {
             solution = jipQuery.nextSolution();
             if (solution == null)
@@ -76,7 +77,8 @@ public class JIPrologEngine {
                 }
             }
             all.add(map);
-            if(!isAll)
+            count++;
+            if (topN >= 0 && count >= topN)
                 break;
         }
         return all;

@@ -55,7 +55,7 @@ public class Planner implements IPlanner {
     @Override
     public String pipeline(String start, String end) {
         String goal = prepareGoal(start, end);
-        List<Map<String, String>> res = JIPrologEngine.queryFactsWithGoal(factList, ruleList, goal, false);
+        List<Map<String, String>> res = JIPrologEngine.queryFactsWithGoal(factList, ruleList, goal, 0);
         String[] solutions = new String[res.size()];
         for (int i = 0; i < res.size(); i++) {
             Map<String, String> map = res.get(i);
@@ -90,9 +90,9 @@ public class Planner implements IPlanner {
     }
 
     @Override
-    public String[] pipelines(String start, String end) {
+    public String[] pipelines(String start, String end, int topN) {
         String goal = prepareGoal(start, end);
-        List<Map<String, String>> res = JIPrologEngine.queryFactsWithGoal(factList, ruleList, goal, true);
+        List<Map<String, String>> res = JIPrologEngine.queryFactsWithGoal(factList, ruleList, goal, topN);
         String[] solutions = new String[res.size()];
         for (int i = 0; i < res.size(); i++) {
             Map<String, String> map = res.get(i);

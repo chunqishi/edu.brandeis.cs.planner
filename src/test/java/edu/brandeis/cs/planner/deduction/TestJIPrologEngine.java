@@ -40,6 +40,6 @@ public class TestJIPrologEngine {
                 "\n" +
                 "coreference(a8).\n" +
                 "coreference(b8).");
-        JIPrologEngine.queryFactsWithGoal(facts, rules.getRules(),"workflow(a1, a3, L).", true);
+        JIPrologEngine.queryFactsWithGoal(facts, rules.getRules(),"workflow(a1, a3, L).", 0);
     }
 }
