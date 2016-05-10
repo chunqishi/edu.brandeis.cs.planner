@@ -106,5 +106,17 @@ public class Planner implements IPlanner {
         Map<String, Object[]> byids = facts.getByIds();
         return byids.keySet().toArray(new String[byids.size()]);
     }
+
+    @Override
+    public String[][] listMetadata() {
+        Map<String, Object[]> byids = facts.getByIds();
+        String[][] metadata = new String[byids.size()][];
+        int i = 0;
+        for (String id: byids.keySet()){
+            metadata[i] = new String[]{id, byids.get(id)[3].toString()};
+            i ++;
+        }
+        return metadata;
+    }
 }
 

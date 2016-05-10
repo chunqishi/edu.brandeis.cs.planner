@@ -26,7 +26,7 @@ public class Facts {
 
     public boolean isServiceId(String text) {
         text = text.trim();
-        return facts.contains(text);
+        return byIds.keySet().contains(text);
     }
 
     public boolean isCategory(String text) {
