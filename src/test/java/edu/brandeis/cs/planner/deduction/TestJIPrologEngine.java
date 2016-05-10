@@ -13,6 +13,7 @@ public class TestJIPrologEngine {
 
     @Test
     public void test() throws IOException {
+        System.out.println("TEST..." + this.getClass());
         Rules rules = new Rules();
         List<String> facts = new ArrayList<String>();
         facts.add("splitter(a1).\n" +

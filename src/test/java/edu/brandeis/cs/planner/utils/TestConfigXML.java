@@ -12,6 +12,7 @@ public class TestConfigXML {
 
     @Test
     public void test(){
+        System.out.println("TEST..." + this.getClass());
         String servicemanager = ConfigXML.config().getString("grids/grid/service_manager");
         Assert.assertEquals("http://eldrad.cs-i.brandeis.edu:8080/service_manager/", servicemanager);
     }

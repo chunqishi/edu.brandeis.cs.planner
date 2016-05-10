@@ -8,7 +8,7 @@ public class TestURLFetcher {
 
     @Test
     public void test() {
-        System.out.println("TEST...");
+        System.out.println("TEST..." + this.getClass());
         String urlString = "http://www.bing.com";
         String urlcontent = URLFetcher.getAsString(urlString);
         System.out.println(urlcontent);

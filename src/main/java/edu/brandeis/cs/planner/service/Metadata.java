@@ -104,6 +104,9 @@ public class Metadata {
                     "connection/credentials/credential[@host='" + host + "' and @port='" + port + "']/username");
             String password = ConfigXML.config().getString(
                     "connection/credentials/credential[@host='" + host + "' and @port='" + port + "']/password");
+            logger.debug("host={}", host);
+            logger.debug("port={}", port);
+            logger.debug("username={}", username);
             client.authorize(username, password);
         } catch (MalformedURLException e) {
             logger.warn("Wrong Service Manager", e);
