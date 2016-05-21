@@ -80,8 +80,8 @@ public class Planner implements IPlanner {
     }
 
     public String execute(WSJsonBuilder json) throws Exception {
-//        String [] pls = this.pipelines(json.getInput(), json.getOutput(), json.getN());
-        String[] pls = new String[]{"[text,opennlp.splitter_2.0.1,opennlp.tokenizer_2.0.1]"};
+        String [] pls = this.pipelines(json.getInput(), json.getOutput(), json.getN());
+//        String[] pls = new String[]{"[text,opennlp.splitter_2.0.1,opennlp.tokenizer_2.0.1]"};
         for (String pl : pls) {
             JsonArr components = json.newPipeline();
             String[] ids = pl.substring(1, pl.length() - 1).split(",");
