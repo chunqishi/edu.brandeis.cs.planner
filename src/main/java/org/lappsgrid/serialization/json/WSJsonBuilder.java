@@ -34,6 +34,7 @@ public class WSJsonBuilder {
     }
 
     public WSJsonBuilder() {
+        discriminator = Discriminators.Uri.JSON_LD;
         json = new JsonObj();
         error = new JsonObj();
         pipelines = new JsonArr();

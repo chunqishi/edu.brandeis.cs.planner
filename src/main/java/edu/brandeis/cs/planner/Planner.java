@@ -57,7 +57,7 @@ public class Planner implements IPlanner {
             s = s.trim();
             if (s.startsWith("{") && s.endsWith("}")) {
                 json = new WSJsonBuilder(s);
-                if (json.getDiscriminator().equals(Discriminators.Uri.ERROR)) {
+                if (Discriminators.Uri.ERROR.equals(json.getDiscriminator())) {
                     return json.toString();
                 }
             } else {
@@ -80,11 +80,14 @@ public class Planner implements IPlanner {
     }
 
     public String execute(WSJsonBuilder json) throws Exception {
-        for (String pl : this.pipelines(json.getInput(), json.getOutput(), json.getN())) {
+//        String [] pls = this.pipelines(json.getInput(), json.getOutput(), json.getN());
+        String[] pls = new String[]{"[text,opennlp.splitter_2.0.1,opennlp.tokenizer_2.0.1]"};
+        for (String pl : pls) {
             JsonArr components = json.newPipeline();
-            JsonArr ids = new JsonArr(pl);
-            for (int i = 0; i < ids.length(); i++) {
-                json.addComponent(components, ids.get(i).toString());
+            String[] ids = pl.substring(1, pl.length() - 1).split(",");
+//            JsonArr ids = new JsonArr(pl);
+            for (int i = 0; i < ids.length; i++) {
+                json.addComponent(components, ids[i]);
             }
         }
         return json.toString();
