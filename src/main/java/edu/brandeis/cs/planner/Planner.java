@@ -1,15 +1,25 @@
 package edu.brandeis.cs.planner;
 
 
+import org.apache.commons.io.IOUtils;
 import edu.brandeis.cs.planner.db.ServiceEntity;
 import edu.brandeis.cs.planner.db.ServiceManagerDB;
 import edu.brandeis.cs.planner.deduction.Facts;
 import edu.brandeis.cs.planner.deduction.JIPrologEngine;
 import edu.brandeis.cs.planner.deduction.Rules;
 import edu.brandeis.cs.planner.utils.JsonReader;
+import org.lappsgrid.discriminator.Discriminators;
+import org.lappsgrid.serialization.Data;
+import org.lappsgrid.serialization.Serializer;
+import org.lappsgrid.serialization.json.JsonArr;
+import org.lappsgrid.serialization.json.JsonObj;
+import org.lappsgrid.serialization.json.WSJsonBuilder;
+import org.lappsgrid.serialization.lif.Container;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -39,14 +49,77 @@ public class Planner implements IPlanner {
     public Planner() {
     }
 
+
     @Override
-    public String execute(String input) {
-        return null;
+    public String execute(String s) {
+        WSJsonBuilder json = null;
+        try {
+            s = s.trim();
+            if (s.startsWith("{") && s.endsWith("}")) {
+                json = new WSJsonBuilder(s);
+                if (json.getDiscriminator().equals(Discriminators.Uri.ERROR)) {
+                    return json.toString();
+                }
+            } else {
+                json = new WSJsonBuilder();
+                json.setError("Only JSON imput is allowed!", "Unkown input: " + s);
+                json.toString();
+                System.err.println(json.toString());
+                logger.error(json.toString());
+                return s;
+            }
+            return execute(json);
+        } catch (Throwable th) {
+            StringWriter sw = new StringWriter();
+            th.printStackTrace(new PrintWriter(sw));
+            json.setError(th.toString(), sw.toString());
+            System.err.println(sw.toString());
+            logger.error(sw.toString());
+            return s;
+        }
+    }
+
+    public String execute(WSJsonBuilder json) throws Exception {
+        for (String pl : this.pipelines(json.getInput(), json.getOutput(), json.getN())) {
+            JsonArr components = json.newPipeline();
+            JsonArr ids = new JsonArr(pl);
+            for (int i = 0; i < ids.length(); i++) {
+                json.addComponent(components, ids.get(i).toString());
+            }
+        }
+        return json.toString();
     }
 
     @Override
     public String getMetadata() {
-        return null;
+        {
+            // get caller name using reflection
+            String name = this.getClass().getName();
+            //
+            String resName = "/metadata/" + name + ".json";
+            System.out.println("load resources:" + resName);
+            try {
+                String meta = IOUtils.toString(this.getClass().getResourceAsStream(resName));
+                JsonObj json = new JsonObj();
+                json.put("discriminator", Discriminators.Uri.META);
+                json.put("payload", new JsonObj(meta));
+                System.out.println("---------------------META:-------------------\n" + json.toString());
+                return json.toString();
+            } catch (Throwable th) {
+                JsonObj json = new JsonObj();
+                json.put("discriminator", Discriminators.Uri.ERROR);
+                JsonObj error = new JsonObj();
+                error.put("class", name);
+                error.put("error", "NOT EXIST: " + resName);
+                error.put("message", th.getMessage());
+                StringWriter sw = new StringWriter();
+                th.printStackTrace(new PrintWriter(sw));
+                System.err.println(sw.toString());
+                error.put("stacktrace", sw.toString());
+                json.put("payload", error);
+                return json.toString();
+            }
+        }
     }
 
     @Override
